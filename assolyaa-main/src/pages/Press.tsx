@@ -89,7 +89,7 @@ export default function Press() {
       <section className="relative min-h-[50vh] overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="/images/card-press.jpg"
+            src="./images/card-press.jpg"
             alt="СМИ и Достижения"
             className="h-full w-full object-cover"
           />

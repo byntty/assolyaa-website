@@ -59,7 +59,7 @@ export default function About() {
           <FadeIn>
             <div className="aspect-[16/9] w-full overflow-hidden bg-parchment lg:aspect-[21/9]">
               <img
-                src="/images/card-about.jpg"
+                src="./images/card-about.jpg"
                 alt="Ассоль — художник"
                 className="h-full w-full object-cover object-top grayscale"
               />

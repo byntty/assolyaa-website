@@ -11,22 +11,22 @@ const navCards = [
   {
     label: "Ассоль",
     path: "/about",
-    image: "/images/card-about.jpg",
+    image: "./images/card-about.jpg",
   },
   {
     label: "Галерея",
     path: "/gallery",
-    image: "/images/card-gallery.jpg",
+    image: "./images/card-gallery.jpg",
   },
   {
     label: "Мастерская",
     path: "/studio",
-    image: "/images/card-studio.jpg",
+    image: "./images/card-studio.jpg",
   },
   {
     label: "СМИ и Достижения",
     path: "/press",
-    image: "/images/card-press.jpg",
+    image: "./images/card-press.jpg",
   },
 ];
 
@@ -49,7 +49,7 @@ export default function Landing() {
       <section ref={heroRef} className="relative h-screen overflow-hidden">
         <motion.div style={{ scale: heroScale }} className="absolute inset-0">
           <img
-            src="/images/hero.jpg"
+            src="./images/hero.jpg"
             alt="Ассоль — картины на ковре"
             className="h-full w-full object-cover"
           />
