@@ -11,3 +11,31 @@ Port 5173 is in use, trying another one...
   [32m➜[39m  [1mNetwork[22m: [36mhttp://192.168.0.9:[1m5174[22m/[39m
 [2m17:29:00[22m [36m[1m[vite][22m[39m [32m.env.local changed, restarting server...[39m
 [2m17:29:00[22m [36m[1m[vite][22m[39m server restarted.
+[2m20:41:38[22m [36m[1m[vite][22m[39m [32mvite.config.ts changed, restarting server...[39m
+[2m20:41:38[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m Re-optimizing dependencies because lockfile has changed
+[2m20:41:38[22m [36m[1m[vite][22m[39m server restarted.
+[2m20:43:48[22m [36m[1m[vite][22m[39m changed tsconfig file detected: C:/Users/Бабах/Desktop/assolyaa-main/assolyaa-main/tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
+[2m20:43:48[22m [36m[1m[vite][22m[39m changed tsconfig file detected: C:/Users/Бабах/Desktop/assolyaa-main/assolyaa-main/src/convex/tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
+[2m20:43:48[22m [36m[1m[vite][22m[39m [32mvite.config.ts changed, restarting server...[39m
+[2m20:43:48[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mindex.html[22m
+[2m20:43:48[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2misolate/index.html[22m
+[2m20:43:49[22m [36m[1m[vite][22m[39m server restarted.
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5174[22m/[39m
+[2m  [32m➜[39m  [1mNetwork[22m[2m: use [22m[1m--host[22m[2m to expose[22m
+[2m20:43:49[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mindex.html[22m
+[2m20:43:49[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2m404.html[22m
+[2m21:04:36[22m [36m[1m[vite][22m[39m [32m.env.local changed, restarting server...[39m
+[2m21:04:37[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2m404.html[22m
+[2m21:04:37[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mindex.html[22m
+[2m21:04:37[22m [36m[1m[vite][22m[39m server restarted.
+[2m21:04:42[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2mindex.html[22m
+[2m21:04:42[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mpage reload [39m[2misolate/index.html[22m
+[2m21:04:42[22m [36m[1m[vite][22m[39m changed tsconfig file detected: C:/Users/Бабах/Desktop/assolyaa-main/assolyaa-main/tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
+[2m21:04:42[22m [36m[1m[vite][22m[39m changed tsconfig file detected: C:/Users/Бабах/Desktop/assolyaa-main/assolyaa-main/src/convex/tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
+[2m21:08:30[22m [36m[1m[vite][22m[39m [32m.env.local changed, restarting server...[39m
+[2m21:08:31[22m [36m[1m[vite][22m[39m server restarted.
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5174[22m/[39m
+  [32m➜[39m  [1mNetwork[22m: [36mhttp://26.95.118.54:[1m5174[22m/[39m
+  [32m➜[39m  [1mNetwork[22m: [36mhttp://192.168.0.9:[1m5174[22m/[39m
