@@ -121,7 +121,7 @@ createRoot(document.getElementById("root")!).render(
         <VlyToolbar />
       </ToolbarErrorBoundary>
       <ConvexAuthProvider client={convex}>
-        <BrowserRouter basename={import.meta.env.BASE_URL === '/' ? undefined : import.meta.env.BASE_URL.slice(0, -1)}>
+        <BrowserRouter basename={import.meta.env.BASE_URL === '/' || import.meta.env.BASE_URL === './' ? undefined : import.meta.env.BASE_URL.slice(0, -1)}>
           <RouteSyncer />
           <Suspense fallback={<RouteLoading />}>
             <Routes>
