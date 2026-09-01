@@ -1,4 +1,5 @@
 import { useEffect, useCallback } from "react";
+import { Link } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import type { Artwork } from "./ArtworkCard";
@@ -123,12 +124,12 @@ export function Lightbox({ artwork, onClose }: LightboxProps) {
               )}
 
               {artwork.status === "available" && (
-                <a
-                  href="/contact"
+                <Link
+                  to="/contact"
                   className="mt-8 inline-flex items-center gap-2 border-b border-foreground/30 pb-1 font-sans text-[11px] uppercase tracking-[0.15em] text-foreground transition-all duration-300 hover:border-foreground hover:opacity-70"
                 >
                   Заказать такую же работу
-                </a>
+                </Link>
               )}
             </div>
           </motion.div>
