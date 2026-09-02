@@ -1,4 +1,7 @@
 import type { Artwork } from "@/components/ArtworkCard";
+import { assetUrl } from "@/lib/assets";
+
+const artworkImage = (name: string) => assetUrl(`images/${name}`);
 
 export const artworks: Artwork[] = [
   {
@@ -10,7 +13,7 @@ export const artworks: Artwork[] = [
     price: "Sold out",
     status: "sold",
     series: "QAZAQ CONTENT",
-    imageUrl: "./images/artwork-01.jpg",
+    imageUrl: artworkImage("artwork-01.jpg"),
     description:
       "Портрет Томирис — Царицы Саков-Массагетов (570–520 гг. до н. э.). В те времена царь Кир, покорив множество стран, отправился в поход на Великую Степь. В решающей битве наравне с мужчинами участвовали женщины, девушки-саки. Этот бой Геродот назвал «самым жестоким и великим». Томирис была гибким стратегом, пользовалась большим авторитетом среди населения.",
   },
@@ -23,7 +26,7 @@ export const artworks: Artwork[] = [
     price: "6 000 €",
     status: "sold",
     series: "QAZAQ CONTENT",
-    imageUrl: "./images/artwork-02.jpg",
+    imageUrl: artworkImage("artwork-02.jpg"),
     description:
       "Гаухар-батыр (девушка-батыр). Настоящее имя — Майсара, сестра батыра Малайсары и жена Кабанбай батыра. С детства Гаухар была лучшей в стрельбе и воинском ремесле. Наравне с мужчинами сражалась против джунгар. Однажды отряд попал в засаду, и в отчаянной схватке девушка-батыр вырвалась из окружения и принесла важные сведения о враге, ставшие решающими в сражении на Алаколе в 1725 году.",
   },
@@ -36,7 +39,7 @@ export const artworks: Artwork[] = [
     price: "5 000 €",
     status: "sold",
     series: "QAZAQ CONTENT",
-    imageUrl: "./images/artwork-03.jpg",
+    imageUrl: artworkImage("artwork-03.jpg"),
     description:
       "Айбике-батыр — дочь Буланбай-батыра, разведчица, которая плечом к плечу со своим отцом сражалась с джунгарами. Айбике была главой разведывательного отряда, доносила полководцам информацию о местонахождении врагов и могла проложить путь как днём, так и ночью, и даже в самые метельные и туманные дни.",
   },
@@ -49,7 +52,7 @@ export const artworks: Artwork[] = [
     price: "Sold out",
     status: "sold",
     series: "QAZAQ CONTENT",
-    imageUrl: "./images/artwork-04.jpg",
+    imageUrl: artworkImage("artwork-04.jpg"),
     description:
       "Собирательный образ на основе нескольких исторических персонажей. Бопай Ханым (1690–1780) — супруга хана Младшего жуза Абулхайра, одна из самых влиятельных женщин в Казахском ханстве. Выступала на народных собраниях, вела переписку с царскими администраторами. Сестра хана Кенесары организовала отряд из женщин для борьбы за независимость.",
   },
@@ -62,7 +65,7 @@ export const artworks: Artwork[] = [
     price: "25 000 €",
     status: "available",
     series: "QAZAQ CONTENT",
-    imageUrl: "./images/artwork-05.jpg",
+    imageUrl: artworkImage("artwork-05.jpg"),
     description:
       "Айтолкын-батыр — дочь султана Абылая. Девушки-батыры плечом к плечу воевали вместе с мужьями, отцами и братьями в борьбе с джунгарами. Когда Айтолкын погибла в одном из сражений, султан Абылай охватило большое горе и гнев. Он приказал убить всех врагов, участвовавших в битве, до единого, и все награбленное золото похоронить вместе с дочерью.",
   },
@@ -75,7 +78,7 @@ export const artworks: Artwork[] = [
     price: "4 000 €",
     status: "sold",
     series: "QAZAQ CONTENT",
-    imageUrl: "./images/artwork-06.jpg",
+    imageUrl: artworkImage("artwork-06.jpg"),
     description:
       "Фатима — жена хана Букеевской Орды Жангира. Она была очень красивой, образованной, мудрой женщиной. На коронации императора Николая I, где она сопровождала супруга, все присутствующие отметили воспитание, манеры и знание языков жены хана. В данной картине хотела показать красоту и изящество казахских женщин.",
   },
@@ -88,7 +91,7 @@ export const artworks: Artwork[] = [
     price: "Sold out",
     status: "sold",
     series: "QAZAQ CONTENT",
-    imageUrl: "./images/artwork-07.jpg",
+    imageUrl: artworkImage("artwork-07.jpg"),
     description:
       "Рабия Султан-бегим — принцесса из династии Тимуридов, дочь Улугбека, правнучка эмира Тимура. Считалась самой красивой женщиной Востока. Её любили и уважали, она занималась благотворительностью и устраивала празднества для простых людей. На могиле Рабии в XV веке был построен мавзолей — культурная ценность Казахстана.",
   },
@@ -101,7 +104,7 @@ export const artworks: Artwork[] = [
     price: "Sold out",
     status: "sold",
     series: "QAZAQ CONTENT",
-    imageUrl: "./images/artwork-08.jpg",
+    imageUrl: artworkImage("artwork-08.jpg"),
     description:
       "Жер-Ана — мифологический образ, олицетворяющий Землю-мать, отсылающий к образу богини Умай. Умай — добрый дух, древняя богиня плодородия тюркских народов, хозяйка гор, покровительница детей и материнства.",
   },
@@ -114,7 +117,7 @@ export const artworks: Artwork[] = [
     price: "Sold out",
     status: "sold",
     series: "QAZAQ CONTENT",
-    imageUrl: "./images/artwork-09.jpg",
+    imageUrl: artworkImage("artwork-09.jpg"),
     description:
       "Көкбөри — мифологический образ, связанный с тюркской мифологией и тотемными животными. Восточный орнамент и традиционный ковёр создают уникальную текстуру, вплетая древние символы в ткань видения художницы.",
   },
@@ -127,7 +130,7 @@ export const artworks: Artwork[] = [
     price: "Sold out",
     status: "sold",
     series: "QAZAQ CONTENT",
-    imageUrl: "./images/artwork-10.jpg",
+    imageUrl: artworkImage("artwork-10.jpg"),
     description:
       "Айганим — образ выдающейся женщины из тюркской истории. Мудрость, сила и красота героини выходит за рамки формата и переходит в объём, который обволакивает, гипнотизирует и погружает в другую реальность.",
   },
@@ -140,7 +143,7 @@ export const artworks: Artwork[] = [
     price: "Sold out",
     status: "sold",
     series: "QAZAQ CONTENT",
-    imageUrl: "./images/artwork-11.jpg",
+    imageUrl: artworkImage("artwork-11.jpg"),
     description:
       "Курманжан Датка — выдающаяся правительница южного Кыргызстана XIX века. Женщина, которая правила целым регионом и защитила свой народ. Восточные орнаменты вплетены в ткань видения художницы.",
   },
@@ -153,7 +156,7 @@ export const artworks: Artwork[] = [
     price: "7 000 €",
     status: "available",
     series: "QAZAQ CONTENT",
-    imageUrl: "./images/artwork-12.jpg",
+    imageUrl: artworkImage("artwork-12.jpg"),
     description:
       "Аңшы — образ охотницы, хранительницы дикой природы степи. Женщина-охотница с барсом — талисманом. Серо-голубая палитра, бирюзовые глаза кошки и нежный орнамент создают сказочную атмосферу связи человека и зверя.",
   },
@@ -166,7 +169,7 @@ export const artworks: Artwork[] = [
     price: "6 000 €",
     status: "available",
     series: "QAZAQ CONTENT",
-    imageUrl: "./images/artwork-13.jpg",
+    imageUrl: artworkImage("artwork-13.jpg"),
     description:
       "Барыс-қыз — Дочь барса. Образ девушки и барса — священного животного Казахстана. Тёплые золотые тона, скульптурный контур и древние мотивы орнамента возвращают в эпоху Великого Шёлкового пути.",
   },
@@ -179,7 +182,7 @@ export const artworks: Artwork[] = [
     price: "Sold out",
     status: "sold",
     series: "QAZAQ CONTENT",
-    imageUrl: "./images/artwork-14.jpg",
+    imageUrl: artworkImage("artwork-14.jpg"),
     description:
       "Сююмбике — легендарная правительница Казанского ханства XVI века. Одна из самых красивых и мудрых женщин своего времени. Её имя стало символом достоинства и силы тюркских женщин.",
   },

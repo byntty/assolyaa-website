@@ -6,27 +6,28 @@ import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { artworks } from "@/data/artworks";
 import { ArrowRight } from "lucide-react";
+import { assetUrl } from "@/lib/assets";
 
 const navCards = [
   {
     label: "Ассоль",
     path: "/about",
-    image: "./images/card-about.jpg",
+    image: assetUrl("images/card-about.jpg"),
   },
   {
     label: "Галерея",
     path: "/gallery",
-    image: "./images/card-gallery.jpg",
+    image: assetUrl("images/card-gallery.jpg"),
   },
   {
     label: "Мастерская",
     path: "/studio",
-    image: "./images/card-studio.jpg",
+    image: assetUrl("images/card-studio.jpg"),
   },
   {
     label: "СМИ и Достижения",
     path: "/press",
-    image: "./images/card-press.jpg",
+    image: assetUrl("images/card-press.jpg"),
   },
 ];
 
@@ -49,7 +50,7 @@ export default function Landing() {
       <section ref={heroRef} className="relative h-screen overflow-hidden">
         <motion.div style={{ scale: heroScale }} className="absolute inset-0">
           <img
-            src="./images/hero.jpg"
+            src={assetUrl("images/hero.jpg")}
             alt="Ассоль — картины на ковре"
             className="h-full w-full object-cover"
           />
