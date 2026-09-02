@@ -35,6 +35,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Generate Convex types
+        run: npx convex codegen
+
       - name: Build site
         env:
           VITE_CONVEX_URL: ${{ secrets.VITE_CONVEX_URL }}
