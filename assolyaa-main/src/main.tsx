@@ -86,7 +86,10 @@ class RootErrorBoundary extends React.Component<
   }
 }
 
-const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL as string);
+const convexUrl = import.meta.env.VITE_CONVEX_URL;
+const convex = /^https?:\/\//.test(convexUrl)
+  ? new ConvexReactClient(convexUrl)
+  : null;
 
 
 
@@ -120,8 +123,9 @@ createRoot(document.getElementById("root")!).render(
       <ToolbarErrorBoundary>
         <VlyToolbar />
       </ToolbarErrorBoundary>
-      <ConvexAuthProvider client={convex}>
-        <HashRouter>
+      {convex ? (
+        <ConvexAuthProvider client={convex}>
+          <HashRouter>
           <RouteSyncer />
           <Suspense fallback={<RouteLoading />}>
             <Routes>
@@ -147,9 +151,29 @@ createRoot(document.getElementById("root")!).render(
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
-        </HashRouter>
-        <Toaster />
-      </ConvexAuthProvider>
+          </HashRouter>
+          <Toaster />
+        </ConvexAuthProvider>
+      ) : (
+        <>
+          <HashRouter>
+            <RouteSyncer />
+            <Suspense fallback={<RouteLoading />}>
+              <Routes>
+                <Route path="/" element={<Landing />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/gallery" element={<GalleryPage />} />
+                <Route path="/press" element={<PressPage />} />
+                <Route path="/studio" element={<StudioPage />} />
+                <Route path="/collaborate" element={<CollaboratePage />} />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </HashRouter>
+          <Toaster />
+        </>
+      )}
     </RootErrorBoundary>
   </StrictMode>,
 );
