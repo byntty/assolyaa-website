@@ -6,7 +6,9 @@ import { defineConfig } from "vite";
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: './',
+  // GitHub Pages serves this project under /assolyaa-website/, while local
+  // development and other hosts should keep using relative asset URLs.
+  base: process.env.GITHUB_ACTIONS === "true" ? "/assolyaa-website/" : "./",
   plugins: [react(), vlyPlugin(), tailwindcss()],
   resolve: {
     alias: {
