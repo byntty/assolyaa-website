@@ -29,11 +29,12 @@ The convex server has a separate set of environment variables that are accessibl
 
 ### GitHub Pages
 
-The Pages workflow requires a repository Actions secret named `VITE_CONVEX_URL`
-containing the production Convex deployment URL. Add it under **Settings >
-Secrets and variables > Actions** before pushing to `mainchange`. The workflow
-builds the site with the `/assolyaa-website/` base path and deploys it to
-GitHub Pages.
+The Pages workflow requires repository Actions secrets named `VITE_CONVEX_URL`
+(the production Convex URL) and `CONVEX_DEPLOYMENT` (the Convex deployment
+identifier). Add both under **Settings > Secrets and variables > Actions**
+before pushing to `mainchange`. The workflow generates the ignored Convex
+types, builds the site with the `/assolyaa-website/` base path, and deploys it
+to GitHub Pages.
 
 Currently, these variables include auth-specific keys: JWKS, JWT_PRIVATE_KEY, and SITE_URL.
 

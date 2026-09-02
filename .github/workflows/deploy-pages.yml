@@ -36,14 +36,26 @@ jobs:
         run: npm ci
 
       - name: Generate Convex types
-        run: npx convex codegen
+        env:
+          CONVEX_DEPLOYMENT: ${{ secrets.CONVEX_DEPLOYMENT }}
+        run: |
+          if [ -z "$CONVEX_DEPLOYMENT" ]; then
+            echo "::error::The CONVEX_DEPLOYMENT repository secret is not configured."
+            exit 1
+          fi
+          npx convex codegen
 
       - name: Build site
         env:
           VITE_CONVEX_URL: ${{ secrets.VITE_CONVEX_URL }}
+          CONVEX_DEPLOYMENT: ${{ secrets.CONVEX_DEPLOYMENT }}
         run: |
           if [ -z "$VITE_CONVEX_URL" ]; then
             echo "::error::The VITE_CONVEX_URL repository secret is not configured."
+            exit 1
+          fi
+          if [ -z "$CONVEX_DEPLOYMENT" ]; then
+            echo "::error::The CONVEX_DEPLOYMENT repository secret is not configured."
             exit 1
           fi
           npm run build
