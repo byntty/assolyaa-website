@@ -36,13 +36,7 @@ jobs:
         run: npm ci
 
       - name: Build site
-        env:
-          VITE_CONVEX_URL: ${{ secrets.VITE_CONVEX_URL }}
         run: |
-          if [ -z "$VITE_CONVEX_URL" ]; then
-            echo "::error::The VITE_CONVEX_URL repository secret is not configured."
-            exit 1
-          fi
           npm run build
           cp dist/index.html dist/404.html
 

@@ -87,7 +87,8 @@ class RootErrorBoundary extends React.Component<
 }
 
 const convexUrl = import.meta.env.VITE_CONVEX_URL;
-const convex = /^https?:\/\//.test(convexUrl)
+const isGitHubPages = import.meta.env.BASE_URL === "/assolyaa-website/";
+const convex = !isGitHubPages && /^https?:\/\/[^/\s]+/.test(convexUrl)
   ? new ConvexReactClient(convexUrl)
   : null;
 
