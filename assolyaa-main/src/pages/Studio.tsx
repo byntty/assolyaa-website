@@ -1,46 +1,47 @@
 import { FadeIn } from "@/components/FadeIn";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
+import { assetUrl } from "@/lib/assets";
 
 const studioImages = [
   {
-    url: "./images/artwork-01.jpg",
+    url: assetUrl("images/artwork-01.jpg"),
     caption: "Царица Сакская — смешанная техника на ковре",
     span: "col-span-1",
     aspect: "aspect-[4/5]",
   },
   {
-    url: "./images/card-studio.jpg",
+    url: assetUrl("images/card-studio.jpg"),
     caption: "Мастерская — процесс создания картин на ковре",
     span: "col-span-1 sm:col-span-2",
     aspect: "aspect-[16/9]",
   },
   {
-    url: "./images/artwork-05.jpg",
+    url: assetUrl("images/artwork-05.jpg"),
     caption: "Айтолкын-батыр — орнамент и детали ткачества",
     span: "col-span-1 sm:col-span-2",
     aspect: "aspect-[16/9]",
   },
   {
-    url: "./images/artwork-08.jpg",
+    url: assetUrl("images/artwork-08.jpg"),
     caption: "Жер-Ана — работа с натуральными красителями",
     span: "col-span-1",
     aspect: "aspect-[4/5]",
   },
   {
-    url: "./images/card-about.jpg",
+    url: assetUrl("images/card-about.jpg"),
     caption: "Готовая работа — при естественном освещении",
     span: "col-span-1",
     aspect: "aspect-[3/4]",
   },
   {
-    url: "./images/artwork-12.jpg",
+    url: assetUrl("images/artwork-12.jpg"),
     caption: "Аңшы — цветовая палитра и текстура",
     span: "col-span-1",
     aspect: "aspect-[3/4]",
   },
   {
-    url: "./images/artwork-13.jpg",
+    url: assetUrl("images/artwork-13.jpg"),
     caption: "Барыс-қыз — завершающий этап работы",
     span: "col-span-1",
     aspect: "aspect-[3/4]",

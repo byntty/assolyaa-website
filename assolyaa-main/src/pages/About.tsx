@@ -1,6 +1,7 @@
 import { FadeIn } from "@/components/FadeIn";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
+import { assetUrl } from "@/lib/assets";
 
 const exhibitions = [
   { year: "2024", title: "Carpet Art — Томирис", venue: "Париж, Франция" },
@@ -59,7 +60,7 @@ export default function About() {
           <FadeIn>
             <div className="aspect-[16/9] w-full overflow-hidden bg-parchment lg:aspect-[21/9]">
               <img
-                src="./images/card-about.jpg"
+                src={assetUrl("images/card-about.jpg")}
                 alt="Ассоль — художник"
                 className="h-full w-full object-cover object-top grayscale"
               />
