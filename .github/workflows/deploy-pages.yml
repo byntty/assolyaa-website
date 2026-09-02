@@ -38,9 +38,14 @@ jobs:
       - name: Generate Convex types
         env:
           CONVEX_DEPLOYMENT: ${{ secrets.CONVEX_DEPLOYMENT }}
+          CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_DEPLOY_KEY }}
         run: |
           if [ -z "$CONVEX_DEPLOYMENT" ]; then
             echo "::error::The CONVEX_DEPLOYMENT repository secret is not configured."
+            exit 1
+          fi
+          if [ -z "$CONVEX_DEPLOY_KEY" ]; then
+            echo "::error::The CONVEX_DEPLOY_KEY repository secret is not configured."
             exit 1
           fi
           npx convex codegen
