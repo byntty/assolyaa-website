@@ -27,6 +27,14 @@ The project is set up with project specific CONVEX_DEPLOYMENT and VITE_CONVEX_UR
 
 The convex server has a separate set of environment variables that are accessible by the convex backend.
 
+### GitHub Pages
+
+The Pages workflow requires a repository Actions secret named `VITE_CONVEX_URL`
+containing the production Convex deployment URL. Add it under **Settings >
+Secrets and variables > Actions** before pushing to `mainchange`. The workflow
+builds the site with the `/assolyaa-website/` base path and deploys it to
+GitHub Pages.
+
 Currently, these variables include auth-specific keys: JWKS, JWT_PRIVATE_KEY, and SITE_URL.
 
 
