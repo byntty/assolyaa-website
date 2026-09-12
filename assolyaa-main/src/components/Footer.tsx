@@ -1,4 +1,6 @@
 import { Link } from "react-router";
+import { useState } from "react";
+import { toast } from "sonner";
 import { FadeIn } from "./FadeIn";
 
 const footerLinks = [
@@ -16,6 +18,19 @@ const socialLinks = [
 ];
 
 export function Footer() {
+  const [email, setEmail] = useState("");
+
+  const handleSubscribe = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    // No newsletter backend yet: hand the subscription to the studio inbox.
+    window.location.href = `mailto:nurdaulet.bekzhan@gmail.com?subject=${encodeURIComponent(
+      "Подписка на новости Assolyaa",
+    )}&body=${encodeURIComponent(email)}"`;
+    toast.success("Спасибо! Откроется почтовый клиент для подтверждения подписки.");
+    setEmail("");
+  };
+
   return (
     <footer className="border-t border-border/60 bg-black text-white">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
@@ -29,11 +44,14 @@ export function Footer() {
               Получайте новости о новых работах и выставках
             </p>
             <form
-              onSubmit={(e) => e.preventDefault()}
+              onSubmit={handleSubscribe}
               className="mt-4 flex w-full max-w-md items-center gap-0 border-b border-white/20 pb-2"
             >
               <input
                 type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Ваш email"
                 className="flex-1 bg-transparent font-sans text-sm text-white placeholder:text-white/40 focus:outline-none"
               />

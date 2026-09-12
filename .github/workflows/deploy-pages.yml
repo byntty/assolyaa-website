@@ -38,7 +38,33 @@ jobs:
       - name: Build site
         run: |
           npm run build
-          cp dist/index.html dist/404.html
+          # GitHub Pages has no server-side SPA fallback, and the app uses
+          # hash-based routing. Serve 404.html for any unknown path and
+          # redirect old-style deep links (/gallery, /press, ...) to their
+          # hash equivalents (/#/gallery) so refreshes and shared links work.
+          cat > dist/404.html <<'REDIRECT'
+          <!doctype html>
+          <html lang="ru">
+            <head>
+              <meta charset="utf-8" />
+              <title>Assolyaa</title>
+              <script>
+                (function () {
+                  var parts = location.pathname.split("/");
+                  var last = parts.pop();
+                  if (last !== "" && last !== "index.html" && last !== "404.html") {
+                    location.replace(
+                      location.pathname.replace(/[^/]*$/, "") + "#/" + last + location.search
+                    );
+                    return;
+                  }
+                  location.replace(location.pathname.replace(/[^/]*$/, ""));
+                })();
+              </script>
+            </head>
+            <body></body>
+          </html>
+          REDIRECT
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5

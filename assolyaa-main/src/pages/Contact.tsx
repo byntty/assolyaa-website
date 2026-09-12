@@ -2,6 +2,8 @@ import { FadeIn } from "@/components/FadeIn";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { Send } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
 
 const socialLinks = [
   { label: "Instagram", url: "#", handle: "@assolyaa" },
@@ -9,7 +11,29 @@ const socialLinks = [
   { label: "YouTube", url: "#", handle: "Assolyaa" },
 ];
 
+const STUDIO_EMAIL = "nurdaulet.bekzhan@gmail.com";
+
 export default function Contact() {
+  const [sending, setSending] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (sending) return;
+    const data = new FormData(e.currentTarget);
+    const name = String(data.get("name") || "").trim();
+    const email = String(data.get("email") || "").trim();
+    const topic = String(data.get("topic") || "");
+    const message = String(data.get("message") || "").trim();
+    if (!name || !email || !message) return;
+    // No form backend yet: hand the message to the studio inbox.
+    setSending(true);
+    window.location.href = `mailto:${STUDIO_EMAIL}?subject=${encodeURIComponent(
+      `[${topic || "Без темы"}] ${name}`,
+    )}&body=${encodeURIComponent(`${message}\n\n— ${name} (${email})`)}`;
+    toast.success("Откроется почтовый клиент для отправки сообщения.");
+    setTimeout(() => setSending(false), 1500);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -54,7 +78,7 @@ export default function Contact() {
         <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-16 lg:grid-cols-12 lg:gap-20">
           {/* Form */}
           <FadeIn className="lg:col-span-7">
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-8">
+            <form onSubmit={handleSubmit} className="space-y-8">
               <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
                 <div>
                   <label className="mb-3 block font-sans text-[11px] uppercase tracking-[0.15em] text-muted-foreground">
@@ -62,6 +86,8 @@ export default function Contact() {
                   </label>
                   <input
                     type="text"
+                    name="name"
+                    required
                     placeholder="Ваше имя"
                     className="w-full border-b border-border bg-transparent py-3 font-sans text-sm text-foreground placeholder:text-muted-foreground/50 transition-colors focus:border-foreground focus:outline-none"
                   />
@@ -72,6 +98,8 @@ export default function Contact() {
                   </label>
                   <input
                     type="email"
+                    name="email"
+                    required
                     placeholder="ваш@email.com"
                     className="w-full border-b border-border bg-transparent py-3 font-sans text-sm text-foreground placeholder:text-muted-foreground/50 transition-colors focus:border-foreground focus:outline-none"
                   />
@@ -82,7 +110,11 @@ export default function Contact() {
                 <label className="mb-3 block font-sans text-[11px] uppercase tracking-[0.15em] text-muted-foreground">
                   Тема
                 </label>
-                <select className="w-full cursor-pointer appearance-none border-b border-border bg-transparent py-3 font-sans text-sm text-foreground transition-colors focus:border-foreground focus:outline-none">
+                <select
+                  name="topic"
+                  defaultValue=""
+                  className="w-full cursor-pointer appearance-none border-b border-border bg-transparent py-3 font-sans text-sm text-foreground transition-colors focus:border-foreground focus:outline-none"
+                >
                   <option value="">Выберите тему</option>
                   <option value="commission">Заказ картины</option>
                   <option value="exhibition">Выставка</option>
@@ -98,7 +130,9 @@ export default function Contact() {
                   Сообщение
                 </label>
                 <textarea
+                  name="message"
                   rows={5}
+                  required
                   placeholder="Расскажите о вашем проекте или вопросе..."
                   className="w-full resize-none border-b border-border bg-transparent py-3 font-sans text-sm text-foreground placeholder:text-muted-foreground/50 transition-colors focus:border-foreground focus:outline-none"
                 />
@@ -106,7 +140,8 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="group flex items-center gap-3 border-b border-foreground/30 pb-2 font-sans text-[11px] uppercase tracking-[0.15em] text-foreground transition-all duration-300 hover:border-foreground"
+                disabled={sending}
+                className="group flex items-center gap-3 border-b border-foreground/30 pb-2 font-sans text-[11px] uppercase tracking-[0.15em] text-foreground transition-all duration-300 hover:border-foreground disabled:opacity-50"
               >
                 Отправить
                 <Send className="size-3 transition-transform duration-300 group-hover:translate-x-1" />
