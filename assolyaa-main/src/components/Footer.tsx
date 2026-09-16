@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import { useState } from "react";
 import { toast } from "sonner";
 import { FadeIn } from "./FadeIn";
+import { mailtoLink } from "@/lib/site";
 
 const footerLinks = [
   { label: "Картины", path: "/gallery" },
@@ -24,9 +25,7 @@ export function Footer() {
     e.preventDefault();
     if (!email.trim()) return;
     // No newsletter backend yet: hand the subscription to the studio inbox.
-    window.location.href = `mailto:nurdaulet.bekzhan@gmail.com?subject=${encodeURIComponent(
-      "Подписка на новости Assolyaa",
-    )}&body=${encodeURIComponent(email)}"`;
+    window.location.href = mailtoLink("Подписка на новости Assolyaa", email);
     toast.success("Спасибо! Откроется почтовый клиент для подтверждения подписки.");
     setEmail("");
   };

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <title>Assolyaa</title>
+    <script>
+      // GitHub Pages serves this file for any unknown path. The app uses
+      // hash-based routing, so redirect old-style deep links to their hash
+      // equivalents: /gallery -> /#/gallery (query string preserved inside
+      // the hash). Bare directory or index requests just land on the root.
+      (function () {
+        var last = location.pathname.split("/").pop();
+        if (last !== "" && last !== "index.html" && last !== "404.html") {
+          location.replace(
+            location.pathname.replace(/[^/]*$/, "") + "#/" + last + location.search,
+          );
+          return;
+        }
+        location.replace(location.pathname.replace(/[^/]*$/, ""));
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>

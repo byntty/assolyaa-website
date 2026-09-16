@@ -4,14 +4,13 @@ import { Navbar } from "@/components/Navbar";
 import { Send } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { STUDIO_EMAIL, mailtoLink } from "@/lib/site";
 
 const socialLinks = [
   { label: "Instagram", url: "#", handle: "@assolyaa" },
   { label: "TikTok", url: "#", handle: "@assolyaa" },
   { label: "YouTube", url: "#", handle: "Assolyaa" },
 ];
-
-const STUDIO_EMAIL = "nurdaulet.bekzhan@gmail.com";
 
 export default function Contact() {
   const [sending, setSending] = useState(false);
@@ -27,9 +26,10 @@ export default function Contact() {
     if (!name || !email || !message) return;
     // No form backend yet: hand the message to the studio inbox.
     setSending(true);
-    window.location.href = `mailto:${STUDIO_EMAIL}?subject=${encodeURIComponent(
+    window.location.href = mailtoLink(
       `[${topic || "Без темы"}] ${name}`,
-    )}&body=${encodeURIComponent(`${message}\n\n— ${name} (${email})`)}`;
+      `${message}\n\n— ${name} (${email})`,
+    );
     toast.success("Откроется почтовый клиент для отправки сообщения.");
     setTimeout(() => setSending(false), 1500);
   };
@@ -62,10 +62,10 @@ export default function Contact() {
                   — свяжитесь с нами любым удобным способом.
                 </p>
                 <a
-                  href="mailto:nurdaulet.bekzhan@gmail.com"
+                  href={`mailto:${STUDIO_EMAIL}`}
                   className="mt-6 font-serif text-xl font-light text-foreground transition-opacity hover:opacity-60"
                 >
-                  nurdaulet.bekzhan@gmail.com
+                  {STUDIO_EMAIL}
                 </a>
               </div>
             </FadeIn>
@@ -199,10 +199,10 @@ export default function Contact() {
                 </p>
                 <div className="mt-6 space-y-2">
                   <a
-                    href="mailto:nurdaulet.bekzhan@gmail.com"
+                    href={`mailto:${STUDIO_EMAIL}`}
                     className="block font-sans text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
-                    nurdaulet.bekzhan@gmail.com
+                    {STUDIO_EMAIL}
                   </a>
                 </div>
               </div>

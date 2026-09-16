@@ -87,10 +87,44 @@ class RootErrorBoundary extends React.Component<
 }
 
 const convexUrl = import.meta.env.VITE_CONVEX_URL;
-const isGitHubPages = import.meta.env.BASE_URL === "/assolyaa-website/";
-const convex = !isGitHubPages && /^https?:\/\/[^/\s]+/.test(convexUrl)
+// Public pages are fully static and work without Convex; auth/dashboard pages
+// are only routed when a deployment URL is configured.
+const convex = /^https?:\/\/[^/\s]+/.test(convexUrl ?? "")
   ? new ConvexReactClient(convexUrl)
   : null;
+
+function AppRoutes() {
+  return (
+    <Suspense fallback={<RouteLoading />}>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/gallery" element={<GalleryPage />} />
+        <Route path="/press" element={<PressPage />} />
+        <Route path="/studio" element={<StudioPage />} />
+        <Route path="/collaborate" element={<CollaboratePage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        {convex && (
+          <>
+            <Route
+              path="/auth"
+              element={<AuthPage redirectAfterAuth="/dashboard" />}
+            />
+            <Route
+              path="/dashboard"
+              element={
+                <RequireAuth>
+                  <Dashboard />
+                </RequireAuth>
+              }
+            />
+          </>
+        )}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Suspense>
+  );
+}
 
 
 
@@ -118,63 +152,33 @@ function RouteSyncer() {
 }
 
 
+function App() {
+  const router = (
+    <HashRouter>
+      <RouteSyncer />
+      <AppRoutes />
+    </HashRouter>
+  );
+  return convex ? (
+    <ConvexAuthProvider client={convex}>
+      {router}
+      <Toaster />
+    </ConvexAuthProvider>
+  ) : (
+    <>
+      {router}
+      <Toaster />
+    </>
+  );
+}
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <RootErrorBoundary>
       <ToolbarErrorBoundary>
         <VlyToolbar />
       </ToolbarErrorBoundary>
-      {convex ? (
-        <ConvexAuthProvider client={convex}>
-          <HashRouter>
-          <RouteSyncer />
-          <Suspense fallback={<RouteLoading />}>
-            <Routes>
-              <Route path="/" element={<Landing />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/gallery" element={<GalleryPage />} />
-              <Route path="/press" element={<PressPage />} />
-              <Route path="/studio" element={<StudioPage />} />
-              <Route path="/collaborate" element={<CollaboratePage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route
-                path="/auth"
-                element={<AuthPage redirectAfterAuth="/dashboard" />}
-              />
-              <Route
-                path="/dashboard"
-                element={
-                  <RequireAuth>
-                    <Dashboard />
-                  </RequireAuth>
-                }
-              />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-          </HashRouter>
-          <Toaster />
-        </ConvexAuthProvider>
-      ) : (
-        <>
-          <HashRouter>
-            <RouteSyncer />
-            <Suspense fallback={<RouteLoading />}>
-              <Routes>
-                <Route path="/" element={<Landing />} />
-                <Route path="/about" element={<AboutPage />} />
-                <Route path="/gallery" element={<GalleryPage />} />
-                <Route path="/press" element={<PressPage />} />
-                <Route path="/studio" element={<StudioPage />} />
-                <Route path="/collaborate" element={<CollaboratePage />} />
-                <Route path="/contact" element={<ContactPage />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-          </HashRouter>
-          <Toaster />
-        </>
-      )}
+      <App />
     </RootErrorBoundary>
   </StrictMode>,
 );
