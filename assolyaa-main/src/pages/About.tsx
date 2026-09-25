@@ -262,7 +262,7 @@ export default function About() {
               <img
                 src={assetUrl("images/card-about-2.jpeg")}
                 alt="Асель Сабыржанқызы (Assolyaa) — художник"
-                className="h-full w-full object-cover object-top grayscale"
+                className="h-full w-full object-cover object-[center_20%] grayscale"
               />
             </div>
           </FadeIn>
