@@ -29,7 +29,7 @@ const studioImages = [
     aspect: "aspect-[4/5]",
   },
   {
-    url: assetUrl("images/card-about.jpg"),
+    url: assetUrl("images/card-about.jpeg"),
     caption: "Готовая работа — при естественном освещении",
     span: "col-span-1",
     aspect: "aspect-[3/4]",

@@ -12,7 +12,7 @@ const navCards = [
   {
     label: "Ассоль",
     path: "/about",
-    image: assetUrl("images/card-about.jpg"),
+    image: assetUrl("images/card-about.jpeg"),
   },
   {
     label: "Галерея",
