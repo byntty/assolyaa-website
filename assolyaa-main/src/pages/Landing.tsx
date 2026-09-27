@@ -4,7 +4,6 @@ import { Link } from "react-router";
 import { FadeIn } from "@/components/FadeIn";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
-import { artworks } from "@/data/artworks";
 import { ArrowRight } from "lucide-react";
 import { assetUrl } from "@/lib/assets";
 
@@ -25,13 +24,16 @@ const navCards = [
     image: assetUrl("images/card-studio.jpg"),
   },
   {
-    label: "СМИ и Достижения",
+    label: "СМИ",
     path: "/press",
     image: assetUrl("images/card-press.jpg"),
   },
+  {
+    label: "Реклама и коллаборации",
+    path: "/advertising",
+    image: assetUrl("images/collab-hero.png"),
+  },
 ];
-
-const sampleWorks = artworks.slice(0, 3);
 
 export default function Landing() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -81,20 +83,6 @@ export default function Landing() {
             <span className="italic">Assolyaa</span>
           </motion.h1>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2, duration: 0.8 }}
-            className="mt-10 flex flex-col items-center gap-4"
-          >
-            <Link
-              to="/gallery"
-              className="group flex items-center gap-3 border-b border-foreground/30 pb-2 font-sans text-[11px] uppercase tracking-[0.15em] transition-all duration-300 hover:border-foreground"
-            >
-              Смотреть работы
-              <ArrowRight className="size-3 transition-transform duration-300 group-hover:translate-x-1" />
-            </Link>
-          </motion.div>
         </motion.div>
 
         {/* Scroll indicator */}
@@ -110,10 +98,10 @@ export default function Landing() {
         </motion.div>
       </section>
 
-      {/* ─── 4 Navigation Cards ─── */}
+      {/* ─── Navigation Cards ─── */}
       <section className="px-6 py-20 lg:px-12">
         <div className="mx-auto max-w-[1400px]">
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
             {navCards.map((card, i) => (
               <FadeIn key={card.path} delay={i * 0.1}>
                 <Link to={card.path} className="group block">
@@ -138,77 +126,6 @@ export default function Landing() {
               </FadeIn>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* ─── Sample Works ─── */}
-      <section className="px-6 py-20 lg:px-12">
-        <div className="mx-auto max-w-[1400px]">
-          <FadeIn>
-            <div className="mb-16 flex items-end justify-between">
-              <div>
-                <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-                  Избранные работы
-                </p>
-                <h2 className="mt-3 font-serif text-3xl font-light text-foreground md:text-4xl">
-                  Картины на ковре
-                </h2>
-              </div>
-              <Link
-                to="/gallery"
-                className="group hidden items-center gap-2 font-sans text-[11px] uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:text-foreground md:flex"
-              >
-                Все работы
-                <ArrowRight className="size-3 transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
-            </div>
-          </FadeIn>
-
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {sampleWorks.map((work, i) => (
-              <FadeIn key={work.id} delay={i * 0.1}>
-                <Link to="/gallery" className="group block">
-                  <div className="aspect-[3/4] overflow-hidden bg-parchment">
-                    <img
-                      src={work.imageUrl}
-                      alt={work.title}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
-                    />
-                  </div>
-                  <div className="mt-4 flex items-baseline justify-between">
-                    <h3 className="font-serif text-lg font-light text-foreground transition-opacity duration-300 group-hover:opacity-60">
-                      {work.title}
-                    </h3>
-                    <span
-                      className={`font-sans text-[10px] uppercase tracking-[0.12em] ${
-                        work.status === "available"
-                          ? "text-muted-foreground"
-                          : "text-foreground"
-                      }`}
-                    >
-                      {work.status === "available" ? "Available" : "Sold out"}
-                    </span>
-                  </div>
-                  <p className="mt-1 font-sans text-[11px] uppercase tracking-[0.1em] text-muted-foreground">
-                    {work.dimensions} &mdash; {work.year}
-                  </p>
-                </Link>
-              </FadeIn>
-            ))}
-          </div>
-
-          <FadeIn delay={0.4}>
-            <div className="mt-12 flex justify-center lg:hidden">
-              <Link
-                to="/gallery"
-                className="group flex items-center gap-2 font-sans text-[11px] uppercase tracking-[0.12em] text-muted-foreground transition-colors hover:text-foreground"
-              >
-                Смотреть все работы
-                <ArrowRight className="size-3 transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
-            </div>
-          </FadeIn>
         </div>
       </section>
 

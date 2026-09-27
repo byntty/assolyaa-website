@@ -8,7 +8,8 @@ const footerLinks = [
   { label: "Картины", path: "/gallery" },
   { label: "Обо мне", path: "/about" },
   { label: "Мастерская", path: "/studio" },
-  { label: "СМИ и Достижения", path: "/press" },
+  { label: "СМИ", path: "/press" },
+  { label: "Реклама", path: "/advertising" },
   { label: "Контакты", path: "/contact" },
 ];
 
@@ -65,8 +66,8 @@ export function Footer() {
         </FadeIn>
 
         {/* Bottom bar */}
-        <div className="flex flex-col items-center justify-between gap-6 border-t border-white/10 py-8 md:flex-row">
-          <div className="flex items-center gap-8">
+        <div className="flex flex-col items-center justify-between gap-6 border-t border-white/10 py-8 lg:flex-row">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 lg:gap-x-8">
             {footerLinks.map((link) => (
               <Link
                 key={link.path}

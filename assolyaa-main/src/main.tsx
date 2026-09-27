@@ -19,6 +19,7 @@ const GalleryPage = lazy(() => import("./pages/Gallery.tsx"));
 const PressPage = lazy(() => import("./pages/Press.tsx"));
 const StudioPage = lazy(() => import("./pages/Studio.tsx"));
 const CollaboratePage = lazy(() => import("./pages/Collaborate.tsx"));
+const AdvertisingPage = lazy(() => import("./pages/Advertising.tsx"));
 const ContactPage = lazy(() => import("./pages/Contact.tsx"));
 
 // Simple loading fallback for route transitions
@@ -103,6 +104,7 @@ function AppRoutes() {
         <Route path="/press" element={<PressPage />} />
         <Route path="/studio" element={<StudioPage />} />
         <Route path="/collaborate" element={<CollaboratePage />} />
+        <Route path="/advertising" element={<AdvertisingPage />} />
         <Route path="/contact" element={<ContactPage />} />
         {convex && (
           <>

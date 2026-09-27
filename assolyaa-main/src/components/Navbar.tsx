@@ -7,8 +7,9 @@ const navLinks = [
   { label: "Картины", path: "/gallery" },
   { label: "Обо мне", path: "/about" },
   { label: "Мастерская", path: "/studio" },
-  { label: "СМИ и Достижения", path: "/press" },
+  { label: "СМИ", path: "/press" },
   { label: "Сотрудничество", path: "/collaborate" },
+  { label: "Реклама и коллаборации", path: "/advertising" },
   { label: "Контакты", path: "/contact" },
 ];
 
@@ -49,12 +50,12 @@ export function Navbar() {
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden items-center gap-10 lg:flex">
+          <div className="hidden items-center gap-4 lg:flex xl:gap-8">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-[11px] font-sans font-medium tracking-[0.15em] uppercase transition-all duration-300 hover:opacity-60 ${
+                className={`text-[10px] font-sans font-medium tracking-[0.15em] uppercase transition-all duration-300 hover:opacity-60 xl:text-[11px] ${
                   location.pathname === link.path
                     ? "opacity-100"
                     : "opacity-70"
