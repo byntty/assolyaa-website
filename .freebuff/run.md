@@ -2,7 +2,7 @@
 
 ## Layout note
 
-The git repo root is `C:\Users\Бабах\Desktop\assolyaa-main`; the app lives in the
+The repo root is whatever worktree this doc lives in; the app lives in the
 `assolyaa-main/` subfolder. GitHub Actions deploys it to GitHub Pages at
 `https://byntty.github.io/assolyaa-website/` (workflow: `.github/workflows/deploy-pages.yml`
 at the repo root, triggered by pushes to `mainchange`).
@@ -13,7 +13,7 @@ Node.js is a portable install (no system Node):
 
 ## How to reproduce artifacts
 
-1. Copy `.env.local` from the main checkout into `assolyaa-main/`:
+1. Copy `.env.local` from the main checkout into `assolyaa-main/` (never symlink):
    ```
    VITE_CONVEX_URL=https://placeholder.convex.cloud
    ```
@@ -31,13 +31,33 @@ Node.js is a portable install (no system Node):
 
 ## How to run the dev server
 
+Foreground:
+
 ```bash
 cd assolyaa-main
 npm run dev
 ```
 
-Vite dev server on **port 5173** (binds all interfaces). Routes are hash-based
-(`/#/gallery`, `/#/press`, ...).
+Detached (survives the conversation; used for preview registration) — from
+PowerShell, prepending the portable Node dir to PATH and naming the
+executable exactly (`npm.cmd`, not `npm`):
+
+```powershell
+$env:PATH = 'C:\Users\Бабах\nodejs\node-v22.16.0-win-x64;' + $env:PATH
+Set-Location <repo root>\assolyaa-main
+(Start-Process -FilePath 'npm.cmd' -ArgumentList 'run','dev' `
+  -RedirectStandardOutput <repo root>\.freebuff\preview-<thread>.log `
+  -RedirectStandardError  <repo root>\.freebuff\preview-<thread>.log.err `
+  -WindowStyle Hidden -PassThru).Id
+```
+
+Then poll the log until it prints `ready`, and confirm the listener:
+`Get-NetTCPConnection -State Listen -LocalPort 5173` (the node pid differs from the
+`npm.cmd` pid printed above).
+
+Vite dev server on **port 5173** (binds all interfaces, so both `127.0.0.1:5173`
+and `localhost:5173` answer; use the `127.0.0.1` form when registering a preview).
+Routes are hash-based (`/#/gallery`, `/#/press`, ...).
 
 ## How to test the production build
 
