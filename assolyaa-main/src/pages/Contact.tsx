@@ -184,10 +184,10 @@ export default function Contact() {
                 </p>
                 <div className="mt-6 space-y-2">
                   <a
-                    href="tel:+77777014666"
+                    href="tel:+77770011686"
                     className="block font-serif text-lg font-light text-foreground transition-opacity hover:opacity-60"
                   >
-                    +7 777 701 46 66
+                    +7 777 001 1686
                   </a>
                 </div>
               </div>

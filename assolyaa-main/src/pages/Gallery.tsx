@@ -29,7 +29,7 @@ export default function Gallery() {
               Портфолио
             </p>
             <h1 className="mt-4 font-serif text-4xl font-light text-foreground md:text-6xl">
-              <span className="italic">Галерея</span>
+              <span className="italic">Картины</span>
             </h1>
           </FadeIn>
 

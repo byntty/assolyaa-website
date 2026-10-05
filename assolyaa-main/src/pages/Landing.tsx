@@ -9,17 +9,17 @@ import { assetUrl } from "@/lib/assets";
 
 const navCards = [
   {
-    label: "Ассоль",
+    label: "Обо мне",
     path: "/about",
     image: assetUrl("images/card-about.jpeg"),
   },
   {
-    label: "Галерея",
+    label: "Картины",
     path: "/gallery",
     image: assetUrl("images/card-gallery.jpg"),
   },
   {
-    label: "Мастерская",
+    label: "Обучение",
     path: "/studio",
     image: assetUrl("images/card-studio.jpg"),
   },
@@ -197,10 +197,10 @@ export default function Landing() {
             </h2>
             <div className="mt-12 space-y-6">
               <a
-                href="tel:+77777014666"
+                href="tel:+77770011686"
                 className="block font-serif text-xl font-light text-foreground transition-opacity hover:opacity-60"
               >
-                +7 777 701 46 66
+                +7 777 001 1686
               </a>
               <p className="font-sans text-sm leading-relaxed text-muted-foreground">
                 WhatsApp / Telegram

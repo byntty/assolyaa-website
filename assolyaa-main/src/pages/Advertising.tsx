@@ -126,8 +126,8 @@ const artworks = [
   },
   {
     file: "collab-art-07.png",
-    alt: "Портрет блондинки на ковре",
-    caption: "Портрет блондинки",
+    alt: "Портрет Елены Рыбакиной на ковре",
+    caption: "Портрет - Елена Рыбакина",
   },
   {
     file: "collab-art-06.png",
@@ -136,8 +136,8 @@ const artworks = [
   },
   {
     file: "collab-art-08.jpg",
-    alt: "Картина на ковре в раме",
-    caption: "Работа в раме",
+    alt: "Портрет Михаила Шайдарова на ковре в раме",
+    caption: "Портрет - Михаил Шайдаров",
   },
 ];
 
@@ -221,7 +221,7 @@ const brands = [
   "Huawei",
   "Kazakhfilm",
   "inDrive",
-  "Sensui",
+  "SenSulu",
   "Maybelline",
   "KIA",
   "HAVAL",
@@ -923,8 +923,8 @@ export default function Advertising() {
         intro="Проекты с международными и казахстанскими брендами: интеграции, арт-объекты, активации и кампании."
       >
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-7">
-            <ul className="grid grid-cols-1 border-t border-border/70 sm:grid-cols-2">
+          <div className="lg:col-span-12">
+            <ul className="grid grid-cols-1 border-t border-border/70 sm:grid-cols-2 lg:grid-cols-3">
               {brands.map((brand, i) => (
                 <li
                   key={brand}
@@ -939,21 +939,10 @@ export default function Advertising() {
                 </li>
               ))}
             </ul>
-          </div>
-
-          <FadeIn delay={0.1} className="lg:col-span-5">
-            <div className="group overflow-hidden bg-parchment">
-              <img
-                src={IMG("collab-brands.png")}
-                alt="Логотипы брендов-партнёров Ассоль"
-                loading="lazy"
-                className="aspect-[4/5] w-full object-cover transition-transform duration-[1600ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-[1.03]"
-              />
-            </div>
             <p className="mt-4 font-sans text-[11px] tracking-[0.04em] text-muted-foreground">
               {brands.length} брендов · 2013—2026
             </p>
-          </FadeIn>
+          </div>
         </div>
       </Chapter>
 
@@ -1151,10 +1140,10 @@ export default function Advertising() {
                   Елизавета
                 </p>
                 <a
-                  href="tel:+77478936842"
+                  href="tel:+77770011686"
                   className="mt-2 block font-serif text-2xl font-light text-ivory transition-opacity hover:opacity-70"
                 >
-                  +7 747 893 6842
+                  +7 777 001 1686
                 </a>
               </div>
               <div>

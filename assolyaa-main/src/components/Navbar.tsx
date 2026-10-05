@@ -6,7 +6,7 @@ import { Menu, X } from "lucide-react";
 const navLinks = [
   { label: "Картины", path: "/gallery" },
   { label: "Обо мне", path: "/about" },
-  { label: "Мастерская", path: "/studio" },
+  { label: "Обучение", path: "/studio" },
   { label: "СМИ", path: "/press" },
   { label: "Сотрудничество", path: "/collaborate" },
   { label: "Реклама и коллаборации", path: "/advertising" },
@@ -19,15 +19,19 @@ export function Navbar() {
   const location = useLocation();
   const isHome = location.pathname === "/";
 
+  // Reset the mobile overlay when the route changes (adjust-state-during-render
+  // pattern — avoids a setState call inside an effect).
+  const [prevPath, setPrevPath] = useState(location.pathname);
+  if (prevPath !== location.pathname) {
+    setPrevPath(location.pathname);
+    setMobileOpen(false);
+  }
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [location.pathname]);
 
   return (
     <>

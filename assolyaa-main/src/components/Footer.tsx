@@ -7,7 +7,7 @@ import { mailtoLink } from "@/lib/site";
 const footerLinks = [
   { label: "Картины", path: "/gallery" },
   { label: "Обо мне", path: "/about" },
-  { label: "Мастерская", path: "/studio" },
+  { label: "Обучение", path: "/studio" },
   { label: "СМИ", path: "/press" },
   { label: "Реклама", path: "/advertising" },
   { label: "Контакты", path: "/contact" },
