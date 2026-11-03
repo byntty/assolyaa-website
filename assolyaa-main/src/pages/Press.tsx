@@ -1,7 +1,6 @@
 import { FadeIn } from "@/components/FadeIn";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
-import { assetUrl } from "@/lib/assets";
 
 const reachStats = [
   { value: "113", label: "публичных упоминаний в прессе" },
@@ -785,26 +784,18 @@ export default function Press() {
       <Navbar />
 
       {/* Hero */}
-      <section className="relative min-h-[50vh] overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src={assetUrl("images/card-press.jpg")}
-            alt="СМИ и Достижения"
-            className="h-full w-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-background" />
-        </div>
+      <section className="relative">
         <div className="relative mx-auto max-w-[1400px] px-6 pt-32 pb-16 lg:px-12">
           <FadeIn>
-            <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-white/60">
+            <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
               СМИ и Пресса
             </p>
-            <h1 className="mt-4 font-serif text-4xl font-light text-white md:text-6xl">
+            <h1 className="mt-4 font-serif text-4xl font-light text-foreground md:text-6xl">
               Press &amp; Media <span className="italic">Dossier 2026</span>
             </h1>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <p className="mt-6 max-w-2xl font-sans text-sm leading-[1.9] text-white/80">
+            <p className="mt-6 max-w-2xl font-sans text-sm leading-[1.9] text-muted-foreground">
               Медиа-досье Асель Сабыржанқызы (Assolyaa) для журналистов, редакторов,
               кураторов выставок и партнёров: 113 публичных упоминаний за 2013–2026 годы
               на 6+ языках мира — от The Independent и Euronews до TikTok Newsroom.
@@ -812,14 +803,14 @@ export default function Press() {
           </FadeIn>
           <FadeIn delay={0.15}>
             <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 font-sans text-sm">
-              <span className="text-[11px] uppercase tracking-[0.2em] text-white/50">
+              <span className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
                 Контакты
               </span>
               <a
                 href="https://assolyaa.kz/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white/90 underline decoration-white/30 underline-offset-4 transition-colors hover:text-white hover:decoration-white/70"
+                className="text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-foreground"
               >
                 assolyaa.kz
               </a>
@@ -827,7 +818,7 @@ export default function Press() {
                 href="https://www.instagram.com/assolyaa/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-white/90 underline decoration-white/30 underline-offset-4 transition-colors hover:text-white hover:decoration-white/70"
+                className="text-foreground underline decoration-border underline-offset-4 transition-colors hover:decoration-foreground"
               >
                 @assolyaa
               </a>
@@ -1122,9 +1113,9 @@ export default function Press() {
                 </FadeIn>
                 <FadeIn delay={0.08} className="lg:col-span-9">
                   <ul className="space-y-4">
-                    {block.entries.map((entry) => (
+                    {block.entries.map((entry, i) => (
                       <li
-                        key={entry.label}
+                        key={`${block.year}-${i}`}
                         className="border-l border-border/60 pl-6 font-sans text-sm leading-[1.9] text-muted-foreground"
                       >
                         {entry.url ? (

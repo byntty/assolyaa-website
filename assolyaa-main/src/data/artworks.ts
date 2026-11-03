@@ -24,7 +24,7 @@ export const artworks: Artwork[] = [
     medium: "Смешанная техника, ковёр",
     dimensions: "230 × 150 см",
     price: "6 000 €",
-    status: "sold",
+    status: "available",
     series: "QAZAQ CONTENT",
     imageUrl: artworkImage("artwork-02.jpg"),
     description:
@@ -37,7 +37,7 @@ export const artworks: Artwork[] = [
     medium: "Смешанная техника, ковёр",
     dimensions: "230 × 160 см",
     price: "5 000 €",
-    status: "sold",
+    status: "available",
     series: "QAZAQ CONTENT",
     imageUrl: artworkImage("artwork-03.jpg"),
     description:
@@ -76,7 +76,7 @@ export const artworks: Artwork[] = [
     medium: "Смешанная техника, ковёр",
     dimensions: "230 × 150 см",
     price: "4 000 €",
-    status: "sold",
+    status: "available",
     series: "QAZAQ CONTENT",
     imageUrl: artworkImage("artwork-06.jpg"),
     description:

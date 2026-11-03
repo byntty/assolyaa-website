@@ -32,7 +32,7 @@ const chapters = [
 ];
 
 const heroStats = [
-  { value: "299K", label: "подписчиков Instagram" },
+  { value: "301K", label: "подписчиков Instagram" },
   { value: "462K", label: "подписчиков TikTok" },
   { value: "Top 50", label: "креаторов мира · Discover List 2026" },
 ];
@@ -147,8 +147,14 @@ const carCase = [
 ];
 
 const carActivation = [
-  { file: "collab-cars-01.jpg", alt: "Арт-перформанс: расписанный автомобиль на улице" },
-  { file: "collab-cars-02.jpg", alt: "Расписанный вручную автомобиль в городе" },
+  {
+    file: "collab-cars-01.jpg",
+    alt: "Арт-перформанс: расписанный автомобиль на улице",
+  },
+  {
+    file: "collab-cars-02.jpg",
+    alt: "Расписанный вручную автомобиль в городе",
+  },
 ];
 
 /** Wall of real posts: art gifts to stars, brand integrations, virals. */
@@ -547,10 +553,10 @@ export default function Advertising() {
     <div id="top" className="min-h-screen bg-background">
       <Navbar />
 
-      {/* Hero — split editorial cover */}
+      {/* Hero — text-only editorial cover (photo removed from the top) */}
       <section className="relative">
         <div className="grid grid-cols-1 lg:grid-cols-12">
-          <div className="order-2 flex flex-col justify-between px-6 pb-16 pt-14 md:px-10 lg:order-1 lg:col-span-6 lg:px-16 lg:pb-24 lg:pt-40">
+          <div className="flex flex-col justify-between px-6 pb-16 pt-14 md:px-10 lg:col-span-12 lg:px-16 lg:pb-24 lg:pt-40">
             <FadeIn>
               <p className={eyebrow}>Реклама и коллаборации · Media Kit</p>
               <h1 className="mt-7 font-serif text-[42px] font-light leading-[1.03] text-foreground md:text-[68px]">
@@ -602,19 +608,6 @@ export default function Advertising() {
                 ))}
               </dl>
             </FadeIn>
-          </div>
-
-          <div className="relative order-1 lg:order-2 lg:col-span-6">
-            <img
-              src={IMG("collab-hero.png")}
-              alt="Ассоль в мастерской перед картиной на ковре"
-              className="h-[58vh] w-full object-cover object-top lg:h-full lg:min-h-[94vh]"
-            />
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 hidden bg-gradient-to-t from-black/35 to-transparent p-8 lg:block">
-              <p className="font-sans text-[10px] uppercase tracking-[0.32em] text-white/70">
-                Ассоль · Kilemart · Алматы
-              </p>
-            </div>
           </div>
         </div>
       </section>
@@ -675,8 +668,8 @@ export default function Advertising() {
           <FadeIn className="lg:col-span-7">
             <div className="group overflow-hidden bg-parchment">
               <img
-                src={IMG("collab-cover.jpg")}
-                alt="Ассоль у картины на ковре"
+                src={IMG("fillers/brush.jpg")}
+                alt="Работа над картиной"
                 loading="lazy"
                 className="aspect-[16/10] w-full object-cover transition-transform duration-[1600ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-[1.03]"
               />
@@ -729,7 +722,9 @@ export default function Advertising() {
                 alt={art.alt}
                 caption={art.caption}
                 index={String(i + 1).padStart(2, "0")}
-                aspect={i === 0 ? "aspect-[2/3] md:aspect-[3/4]" : "aspect-[2/3]"}
+                aspect={
+                  i === 0 ? "aspect-[2/3] md:aspect-[3/4]" : "aspect-[2/3]"
+                }
                 className={i === 0 ? "md:flex md:h-full md:flex-col" : ""}
               />
             </FadeIn>
@@ -1039,24 +1034,24 @@ export default function Advertising() {
             headerLeft="Скриншоты статистики"
             light
           >
-          {statsShots.map((file, i) => (
-            <figure
-              key={file}
-              className="w-[170px] shrink-0 snap-start sm:w-[200px]"
-            >
-              <div className="overflow-hidden bg-black/40">
-                <img
-                  src={IMG(file)}
-                  alt="Скриншот статистики аккаунта"
-                  loading="lazy"
-                  className="aspect-[9/16] w-full object-cover"
-                />
-              </div>
-              <figcaption className="mt-3 font-sans text-[10px] tracking-[0.2em] text-ivory/40">
-                {String(i + 1).padStart(2, "0")}
-              </figcaption>
-            </figure>
-          ))}
+            {statsShots.map((file, i) => (
+              <figure
+                key={file}
+                className="w-[170px] shrink-0 snap-start sm:w-[200px]"
+              >
+                <div className="overflow-hidden bg-black/40">
+                  <img
+                    src={IMG(file)}
+                    alt="Скриншот статистики аккаунта"
+                    loading="lazy"
+                    className="aspect-[9/16] w-full object-cover"
+                  />
+                </div>
+                <figcaption className="mt-3 font-sans text-[10px] tracking-[0.2em] text-ivory/40">
+                  {String(i + 1).padStart(2, "0")}
+                </figcaption>
+              </figure>
+            ))}
           </SnapStrip>
         </div>
       </Chapter>

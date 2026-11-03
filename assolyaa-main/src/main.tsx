@@ -1,4 +1,4 @@
-import '@vly-ai/integrations';
+import "@vly-ai/integrations";
 import { Toaster } from "@/components/ui/sonner";
 import { RequireAuth } from "@/components/RequireAuth";
 import { VlyToolbar } from "../vly-toolbar-readonly.tsx";
@@ -21,6 +21,10 @@ const StudioPage = lazy(() => import("./pages/Studio.tsx"));
 const CollaboratePage = lazy(() => import("./pages/Collaborate.tsx"));
 const AdvertisingPage = lazy(() => import("./pages/Advertising.tsx"));
 const ContactPage = lazy(() => import("./pages/Contact.tsx"));
+const OrderPage = lazy(() => import("./pages/Order.tsx"));
+const ExhibitionsPage = lazy(() => import("./pages/Exhibitions.tsx"));
+const EventsPage = lazy(() => import("./pages/Events.tsx"));
+const InstallationsPage = lazy(() => import("./pages/Installations.tsx"));
 
 // Simple loading fallback for route transitions
 function RouteLoading() {
@@ -103,6 +107,10 @@ function AppRoutes() {
         <Route path="/gallery" element={<GalleryPage />} />
         <Route path="/press" element={<PressPage />} />
         <Route path="/studio" element={<StudioPage />} />
+        <Route path="/order" element={<OrderPage />} />
+        <Route path="/exhibitions" element={<ExhibitionsPage />} />
+        <Route path="/events" element={<EventsPage />} />
+        <Route path="/installations" element={<InstallationsPage />} />
         <Route path="/collaborate" element={<CollaboratePage />} />
         <Route path="/advertising" element={<AdvertisingPage />} />
         <Route path="/contact" element={<ContactPage />} />
@@ -128,11 +136,12 @@ function AppRoutes() {
   );
 }
 
-
-
 function RouteSyncer() {
   const location = useLocation();
   useEffect(() => {
+    // A new route always opens at the top: without this the browser keeps the
+    // previous scroll offset, so footer links land mid/bottom of the next page.
+    window.scrollTo(0, 0);
     window.parent.postMessage(
       { type: "iframe-route-change", path: location.pathname },
       "*",
@@ -152,7 +161,6 @@ function RouteSyncer() {
 
   return null;
 }
-
 
 function App() {
   const router = (

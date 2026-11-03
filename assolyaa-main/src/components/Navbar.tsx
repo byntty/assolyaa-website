@@ -3,13 +3,17 @@ import { Link, useLocation } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
+/** Main menu — order and labels are part of the site contract. */
 const navLinks = [
-  { label: "Картины", path: "/gallery" },
   { label: "Обо мне", path: "/about" },
-  { label: "Обучение", path: "/studio" },
-  { label: "СМИ", path: "/press" },
-  { label: "Сотрудничество", path: "/collaborate" },
+  { label: "Заказать картину", path: "/order" },
+  { label: "Мои картины", path: "/gallery" },
   { label: "Реклама и коллаборации", path: "/advertising" },
+  { label: "Выставки", path: "/exhibitions" },
+  { label: "Обучение", path: "/studio" },
+  { label: "Ивенты и мероприятия", path: "/events" },
+  { label: "Арт-инсталляции и муралы", path: "/installations" },
+  { label: "СМИ", path: "/press" },
   { label: "Контакты", path: "/contact" },
 ];
 
@@ -53,16 +57,14 @@ export function Navbar() {
             Assolyaa
           </Link>
 
-          {/* Desktop nav */}
-          <div className="hidden items-center gap-4 lg:flex xl:gap-8">
+          {/* Desktop nav — with ten sections the labels stay tight and small */}
+          <div className="hidden items-center gap-4 xl:flex 2xl:gap-6">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-[10px] font-sans font-medium tracking-[0.15em] uppercase transition-all duration-300 hover:opacity-60 xl:text-[11px] ${
-                  location.pathname === link.path
-                    ? "opacity-100"
-                    : "opacity-70"
+                className={`whitespace-nowrap font-sans text-[10px] font-medium uppercase tracking-[0.07em] transition-all duration-300 hover:opacity-60 2xl:text-[11px] 2xl:tracking-[0.09em] ${
+                  location.pathname === link.path ? "opacity-100" : "opacity-70"
                 }`}
               >
                 {link.label}
@@ -70,13 +72,17 @@ export function Navbar() {
             ))}
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile / tablet menu button */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="relative z-50 flex size-10 items-center justify-center lg:hidden"
+            className="relative z-50 flex size-10 items-center justify-center xl:hidden"
             aria-label="Toggle menu"
           >
-            {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+            {mobileOpen ? (
+              <X className="size-5" />
+            ) : (
+              <Menu className="size-5" />
+            )}
           </button>
         </nav>
       </motion.header>
@@ -91,18 +97,20 @@ export function Navbar() {
             transition={{ duration: 0.4 }}
             className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-background"
           >
-            <nav className="flex flex-col items-center gap-10">
+            <nav className="flex max-h-[85vh] flex-col items-center gap-6 overflow-y-auto py-10 lg:gap-7">
               {navLinks.map((link, i) => (
                 <motion.div
                   key={link.path}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.08, duration: 0.5 }}
+                  transition={{ delay: i * 0.06, duration: 0.5 }}
                 >
                   <Link
                     to={link.path}
-                    className={`font-serif text-3xl tracking-wide transition-opacity hover:opacity-60 ${
-                      location.pathname === link.path ? "opacity-100" : "opacity-70"
+                    className={`font-serif text-2xl tracking-wide transition-opacity hover:opacity-60 lg:text-3xl ${
+                      location.pathname === link.path
+                        ? "opacity-100"
+                        : "opacity-70"
                     }`}
                   >
                     {link.label}

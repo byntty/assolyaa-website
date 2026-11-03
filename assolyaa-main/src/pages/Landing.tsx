@@ -1,5 +1,3 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
 import { Link } from "react-router";
 import { FadeIn } from "@/components/FadeIn";
 import { Footer } from "@/components/Footer";
@@ -7,6 +5,7 @@ import { Navbar } from "@/components/Navbar";
 import { ArrowRight } from "lucide-react";
 import { assetUrl } from "@/lib/assets";
 
+/** The main screen keeps only the five original section cards. */
 const navCards = [
   {
     label: "Обо мне",
@@ -14,9 +13,14 @@ const navCards = [
     image: assetUrl("images/card-about.jpeg"),
   },
   {
-    label: "Картины",
+    label: "Мои картины",
     path: "/gallery",
     image: assetUrl("images/card-gallery.jpg"),
+  },
+  {
+    label: "Реклама и коллаборации",
+    path: "/advertising",
+    image: assetUrl("images/fillers/adv.jpg"),
   },
   {
     label: "Обучение",
@@ -28,98 +32,37 @@ const navCards = [
     path: "/press",
     image: assetUrl("images/card-press.jpg"),
   },
-  {
-    label: "Реклама и коллаборации",
-    path: "/advertising",
-    image: assetUrl("images/collab-hero.png"),
-  },
 ];
 
 export default function Landing() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      {/* ─── Header / Hero ─── */}
-      <section ref={heroRef} className="relative h-screen overflow-hidden">
-        <motion.div style={{ scale: heroScale }} className="absolute inset-0">
-          <img
-            src={assetUrl("images/hero.jpg")}
-            alt="Ассоль — картины на ковре"
-            className="h-full w-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/20 to-background" />
-        </motion.div>
-
-        <motion.div
-          style={{ opacity: heroOpacity }}
-          className="relative flex h-full flex-col items-center justify-end px-6 pb-24 text-center"
-        >
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="mb-4 font-sans text-[11px] uppercase tracking-[0.25em] text-foreground/60"
-          >
-            Картины на ковре &middot; #KilemArt
-          </motion.p>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
-            className="font-serif text-5xl font-light leading-[1.1] tracking-tight text-foreground md:text-7xl lg:text-8xl"
-          >
-            Ассоль
-            <br />
-            <span className="italic">Assolyaa</span>
-          </motion.h1>
-
-        </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 0.8 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        >
-          <div className="flex flex-col items-center gap-2">
-            <div className="h-12 w-px animate-pulse bg-foreground/20" />
-          </div>
-        </motion.div>
-      </section>
-
-      {/* ─── Navigation Cards ─── */}
-      <section className="px-6 py-20 lg:px-12">
+      {/* ─── Section cards ─── */}
+      <section className="px-6 pt-28 pb-20 lg:px-12 lg:pt-32">
         <div className="mx-auto max-w-[1400px]">
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-8">
             {navCards.map((card, i) => (
-              <FadeIn key={card.path} delay={i * 0.1}>
+              <FadeIn key={card.path} delay={i * 0.06}>
                 <Link to={card.path} className="group block">
-                  {/* Image with shadow overlay */}
-                  <div className="relative aspect-[3/4] overflow-hidden bg-parchment">
+                  <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-parchment">
                     <img
                       src={card.image}
                       alt={card.label}
-                      loading="lazy"
+                      loading={i < 4 ? "eager" : "lazy"}
                       className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
                     />
                     {/* Shadow gradient at bottom */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-foreground/10 to-transparent" />
-                    {/* Title overlaid on shadow */}
-                    <div className="absolute bottom-0 left-0 right-0 p-6">
-                      <h3 className="font-serif text-2xl font-light text-ivory transition-all duration-500 group-hover:tracking-wider">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent" />
+                    {/* Label and arrow */}
+                    <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6">
+                      <h3 className="font-serif text-2xl font-light leading-tight text-ivory">
                         {card.label}
                       </h3>
+                      <span className="mb-1 flex size-9 shrink-0 items-center justify-center rounded-full border border-ivory/50 text-ivory transition-colors duration-300 group-hover:border-ivory group-hover:bg-ivory group-hover:text-foreground">
+                        <ArrowRight className="size-3.5" strokeWidth={1.25} />
+                      </span>
                     </div>
                   </div>
                 </Link>
@@ -129,64 +72,8 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ─── Commission Info Block ─── */}
-      <section className="bg-charcoal px-6 py-24 lg:px-12">
-        <FadeIn>
-          <div className="mx-auto max-w-4xl text-center">
-            <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-ivory/50">
-              Картина на ковре под заказ
-            </p>
-            <h2 className="mt-6 font-serif text-3xl font-light leading-snug text-ivory md:text-5xl">
-              Закажите картину на ковре
-              <br />
-              <span className="italic">по индивидуальному заказу</span>
-            </h2>
-            <div className="mt-12 grid grid-cols-1 gap-8 text-left sm:grid-cols-3">
-              <div className="border-t border-ivory/20 pt-6">
-                <p className="font-sans text-[11px] uppercase tracking-[0.12em] text-ivory/50">
-                  Стандартные размеры
-                </p>
-                <p className="mt-2 font-serif text-lg font-light text-ivory">
-                  150 × 100 см
-                  <br />
-                  230 × 150 см
-                </p>
-              </div>
-              <div className="border-t border-ivory/20 pt-6">
-                <p className="font-sans text-[11px] uppercase tracking-[0.12em] text-ivory/50">
-                  Стоимость
-                </p>
-                <p className="mt-2 font-serif text-lg font-light text-ivory">
-                  3 000 000 ₸
-                  <br />
-                  (~6 000 $)
-                </p>
-              </div>
-              <div className="border-t border-ivory/20 pt-6">
-                <p className="font-sans text-[11px] uppercase tracking-[0.12em] text-ivory/50">
-                  Лист ожидания
-                </p>
-                <p className="mt-2 font-serif text-lg font-light text-ivory">
-                  5–6 месяцев
-                </p>
-              </div>
-            </div>
-            <p className="mt-10 font-sans text-sm leading-relaxed text-ivory/60">
-              Отправляем картины в любую точку мира по тарифам курьерской службы.
-            </p>
-            <Link
-              to="/collaborate"
-              className="mt-10 inline-flex items-center gap-3 border-b border-ivory/30 pb-2 font-sans text-[11px] uppercase tracking-[0.15em] text-ivory transition-all duration-300 hover:border-ivory"
-            >
-              Подробнее о заказе
-              <ArrowRight className="size-3" />
-            </Link>
-          </div>
-        </FadeIn>
-      </section>
-
       {/* ─── Contacts Block ─── */}
-      <section className="px-6 py-24 lg:px-12">
+      <section className="border-t border-border/50 px-6 py-24 lg:px-12">
         <FadeIn>
           <div className="mx-auto max-w-3xl text-center">
             <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-muted-foreground">

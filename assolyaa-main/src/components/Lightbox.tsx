@@ -36,6 +36,9 @@ export function Lightbox({ artwork, onClose }: LightboxProps) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.4 }}
+          role="dialog"
+          aria-modal="true"
+          aria-label={artwork.title}
           className="fixed inset-0 z-[100] flex items-center justify-center bg-background/95 backdrop-blur-sm overflow-y-auto"
           onClick={onClose}
         >
@@ -56,12 +59,12 @@ export function Lightbox({ artwork, onClose }: LightboxProps) {
             onClick={(e) => e.stopPropagation()}
             className="mx-6 my-12 flex max-h-[90vh] max-w-[1200px] flex-col items-center gap-10 lg:flex-row lg:gap-16"
           >
-            {/* Image */}
-            <div className="relative flex-1 overflow-hidden">
+            {/* Image — contained, never cropped: fits both height and width */}
+            <div className="relative flex flex-1 items-center justify-center">
               <img
                 src={artwork.imageUrl}
                 alt={artwork.title}
-                className="max-h-[65vh] w-full object-contain"
+                className="max-h-[70vh] w-auto max-w-full object-contain"
               />
             </div>
 
@@ -72,10 +75,10 @@ export function Lightbox({ artwork, onClose }: LightboxProps) {
                   {artwork.series}
                 </p>
                 <span
-                  className={`inline-flex items-center px-2 py-0.5 font-sans text-[9px] uppercase tracking-[0.12em] ${
+                  className={`inline-flex items-center px-2 py-0.5 font-sans text-[9px] font-medium uppercase tracking-[0.12em] ${
                     artwork.status === "available"
                       ? "bg-foreground/10 text-foreground"
-                      : "bg-foreground text-background"
+                      : "border border-destructive/40 bg-destructive/10 text-destructive"
                   }`}
                 >
                   {artwork.status === "available" ? "Available" : "Sold out"}
@@ -89,25 +92,39 @@ export function Lightbox({ artwork, onClose }: LightboxProps) {
                   <span className="font-sans text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
                     Год
                   </span>
-                  <span className="font-sans text-sm text-foreground">{artwork.year}</span>
+                  <span className="font-sans text-sm text-foreground">
+                    {artwork.year}
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="font-sans text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
                     Техника
                   </span>
-                  <span className="font-sans text-sm text-foreground">{artwork.medium}</span>
+                  <span className="font-sans text-sm text-foreground">
+                    {artwork.medium}
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="font-sans text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
                     Размер
                   </span>
-                  <span className="font-sans text-sm text-foreground">{artwork.dimensions}</span>
+                  <span className="font-sans text-sm text-foreground">
+                    {artwork.dimensions}
+                  </span>
                 </div>
                 <div className="flex justify-between">
                   <span className="font-sans text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
                     Цена
                   </span>
-                  <span className="font-sans text-sm text-foreground">{artwork.price}</span>
+                  <span
+                    className={`font-sans text-sm ${
+                      artwork.price.trim().toLowerCase() === "sold out"
+                        ? "font-medium text-destructive"
+                        : "text-foreground"
+                    }`}
+                  >
+                    {artwork.price}
+                  </span>
                 </div>
               </div>
 

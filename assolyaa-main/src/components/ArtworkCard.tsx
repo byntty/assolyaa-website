@@ -23,6 +23,10 @@ interface ArtworkCardProps {
 }
 
 export function ArtworkCard({ artwork, index = 0, onClick }: ArtworkCardProps) {
+  const sold = artwork.status === "sold";
+  // Some sold works keep their historical price, others store the label itself.
+  const soldOutLabel = artwork.price.trim().toLowerCase() === "sold out";
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 40 }}
@@ -35,26 +39,33 @@ export function ArtworkCard({ artwork, index = 0, onClick }: ArtworkCardProps) {
       }}
       className="group"
     >
-      {/* Image container */}
+      {/* Image container — sold works stay full-colour; the status lives in the label */}
       <div className="relative aspect-[4/5] overflow-hidden bg-parchment">
-        <img
-          src={artwork.imageUrl}
-          alt={artwork.title}
-          loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
-        />
-        {/* Subtle overlay on hover */}
-        <div className="absolute inset-0 bg-foreground/0 transition-colors duration-500 group-hover:bg-foreground/5" />
-        {/* Status badge */}
-        <div className="absolute left-4 top-4">
+        <button
+          type="button"
+          onClick={onClick}
+          className="block size-full cursor-pointer text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
+          aria-label={`Открыть описание: ${artwork.title}`}
+        >
+          <img
+            src={artwork.imageUrl}
+            alt={artwork.title}
+            loading="lazy"
+            className="h-full w-full object-cover transition-all duration-[1200ms] ease-out group-hover:scale-105"
+          />
+          {/* Subtle overlay on hover */}
+          <div className="absolute inset-0 bg-foreground/0 transition-colors duration-500 group-hover:bg-foreground/5" />
+        </button>
+        {/* Status badge — SOLD OUT reads as red text, the photo is never dimmed */}
+        <div className="pointer-events-none absolute left-4 top-4">
           <span
-            className={`inline-flex items-center px-3 py-1 font-sans text-[10px] uppercase tracking-[0.12em] backdrop-blur-sm ${
-              artwork.status === "available"
-                ? "bg-background/80 text-foreground"
-                : "bg-foreground/80 text-background"
+            className={`inline-flex items-center px-3 py-1 font-sans text-[10px] font-medium uppercase tracking-[0.12em] backdrop-blur-sm ${
+              sold
+                ? "border border-destructive/40 bg-background/90 text-destructive"
+                : "border border-foreground/15 bg-background/85 text-foreground"
             }`}
           >
-            {artwork.status === "available" ? "Available" : "Sold out"}
+            {sold ? "Sold out" : "Available"}
           </span>
         </div>
       </div>
@@ -68,14 +79,18 @@ export function ArtworkCard({ artwork, index = 0, onClick }: ArtworkCardProps) {
           <p className="font-sans text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
             {artwork.dimensions}
           </p>
-          <p className="font-sans text-[11px] uppercase tracking-[0.12em] text-foreground">
+          <p
+            className={`font-sans text-[11px] uppercase tracking-[0.12em] ${
+              soldOutLabel ? "font-medium text-destructive" : "text-foreground"
+            }`}
+          >
             {artwork.price}
           </p>
         </div>
         {/* Description button */}
         <button
           onClick={onClick}
-          className="mt-3 flex items-center gap-2 border-b border-foreground/20 pb-1 font-sans text-[11px] uppercase tracking-[0.15em] text-muted-foreground transition-all duration-300 hover:border-foreground hover:text-foreground w-fit"
+          className="mt-3 flex w-fit items-center gap-2 border-b border-foreground/20 pb-1 font-sans text-[11px] uppercase tracking-[0.15em] text-muted-foreground transition-all duration-300 hover:border-foreground hover:text-foreground"
         >
           <FileText className="size-3" />
           Описание

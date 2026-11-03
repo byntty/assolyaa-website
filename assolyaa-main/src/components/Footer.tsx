@@ -1,70 +1,23 @@
 import { Link } from "react-router";
-import { useState } from "react";
-import { toast } from "sonner";
-import { FadeIn } from "./FadeIn";
-import { mailtoLink } from "@/lib/site";
+import { socialLinks } from "@/lib/site";
 
 const footerLinks = [
-  { label: "Картины", path: "/gallery" },
   { label: "Обо мне", path: "/about" },
-  { label: "Обучение", path: "/studio" },
-  { label: "СМИ", path: "/press" },
+  { label: "Заказать картину", path: "/order" },
+  { label: "Мои картины", path: "/gallery" },
   { label: "Реклама", path: "/advertising" },
+  { label: "Выставки", path: "/exhibitions" },
+  { label: "Обучение", path: "/studio" },
+  { label: "Ивенты", path: "/events" },
+  { label: "Инсталляции", path: "/installations" },
+  { label: "СМИ", path: "/press" },
   { label: "Контакты", path: "/contact" },
 ];
 
-const socialLinks = [
-  { label: "Instagram", url: "#" },
-  { label: "TikTok", url: "#" },
-  { label: "YouTube", url: "#" },
-];
-
 export function Footer() {
-  const [email, setEmail] = useState("");
-
-  const handleSubscribe = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!email.trim()) return;
-    // No newsletter backend yet: hand the subscription to the studio inbox.
-    window.location.href = mailtoLink("Подписка на новости Assolyaa", email);
-    toast.success("Спасибо! Откроется почтовый клиент для подтверждения подписки.");
-    setEmail("");
-  };
-
   return (
     <footer className="border-t border-border/60 bg-black text-white">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
-        {/* Newsletter */}
-        <FadeIn>
-          <div className="flex flex-col items-center gap-6 py-20 text-center">
-            <p className="font-sans text-[11px] font-medium uppercase tracking-[0.2em] text-white/50">
-              Будьте в курсе
-            </p>
-            <p className="font-serif text-2xl text-white md:text-3xl">
-              Получайте новости о новых работах и выставках
-            </p>
-            <form
-              onSubmit={handleSubscribe}
-              className="mt-4 flex w-full max-w-md items-center gap-0 border-b border-white/20 pb-2"
-            >
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Ваш email"
-                className="flex-1 bg-transparent font-sans text-sm text-white placeholder:text-white/40 focus:outline-none"
-              />
-              <button
-                type="submit"
-                className="font-sans text-[11px] font-medium uppercase tracking-[0.15em] text-white transition-opacity hover:opacity-60"
-              >
-                Подписаться
-              </button>
-            </form>
-          </div>
-        </FadeIn>
-
         {/* Bottom bar */}
         <div className="flex flex-col items-center justify-between gap-6 border-t border-white/10 py-8 lg:flex-row">
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 lg:gap-x-8">

@@ -1,7 +1,6 @@
 import { FadeIn } from "@/components/FadeIn";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
-import { assetUrl } from "@/lib/assets";
 
 const education = [
   {
@@ -208,7 +207,7 @@ export default function About() {
       {/* Hero */}
       <section className="relative pt-32 pb-20">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-20">
+          <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-20">
             <FadeIn>
               <div>
                 <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
@@ -231,41 +230,43 @@ export default function About() {
             </FadeIn>
 
             <FadeIn delay={0.15}>
-              <div className="flex flex-col justify-end">
+              <div className="flex flex-col">
                 <p className="font-sans text-sm leading-[1.9] text-muted-foreground">
+                  <span className="font-medium uppercase tracking-[0.12em] text-foreground">
+                    Направление творчества.
+                  </span>{" "}
                   Профессиональный художник и портретист, магистр
                   искусствоведческих наук, автор креативного цифрового контента
-                  и создатель авторского направления KilemArt. Работает в жанрах
-                  современной и портретной живописи, гиперреализма — и в
-                  собственном направлении картин на коврах, основанном на
-                  казахском и тюркском культурном коде.
+                  и создатель авторского направления KilemArt. Художница
+                  работает в жанрах современной и портретной живописи,
+                  гиперреализма, а также в собственном уникальном направлении
+                  картин на коврах, основанном на казахском и тюркском
+                  культурном коде.
                 </p>
                 <p className="mt-6 font-sans text-sm leading-[1.9] text-muted-foreground">
-                  Творчество отмечено на государственном уровне: медалью «Ерен
-                  еңбегі үшін», нагрудным знаком «Алтын Барыс» и благодарностями
-                  Президента Республики Казахстан, — а также признано
-                  международными платформами: в 2026 году Асель вошла в топ-50
-                  мировых новаторов TikTok The Discover List (категория
-                  Innovators) как единственная представительница Казахстана.
+                  <span className="font-medium uppercase tracking-[0.12em] text-foreground">
+                    Международное признание.
+                  </span>{" "}
+                  В 2026 году Ассоль вошла в{" "}
+                  <span className="font-medium text-foreground">
+                    ТОП-50 выдающихся креаторов мира
+                  </span>{" "}
+                  по версии{" "}
+                  <span className="italic">TikTok The Discover List</span>{" "}
+                  (категория <span className="italic">Innovators</span>) как
+                  единственная представительница из Казахстана.
+                </p>
+                <p className="mt-6 font-sans text-sm leading-[1.9] text-muted-foreground">
+                  <span className="font-medium uppercase tracking-[0.12em] text-foreground">
+                    Государственные награды.
+                  </span>{" "}
+                  Творчество отмечено медалью «Ерен еңбегі үшін», нагрудным
+                  знаком «Алтын Барыс», а также благодарностями и грамотами от
+                  Президента Республики Казахстан.
                 </p>
               </div>
             </FadeIn>
           </div>
-        </div>
-      </section>
-
-      {/* Portrait */}
-      <section className="px-6 pb-24 lg:px-12">
-        <div className="mx-auto max-w-[1400px]">
-          <FadeIn>
-            <div className="aspect-[16/9] w-full overflow-hidden bg-parchment lg:aspect-[21/9]">
-              <img
-                src={assetUrl("images/card-about-2.jpeg")}
-                alt="Асель Сабыржанқызы (Assolyaa) — художник"
-                className="h-full w-full object-cover object-[center_20%] grayscale"
-              />
-            </div>
-          </FadeIn>
         </div>
       </section>
 
@@ -558,17 +559,14 @@ export default function About() {
           <div className="space-y-0">
             {awards.map((award, i) => (
               <FadeIn key={i} delay={i * 0.05}>
-                <div className="group flex items-baseline gap-6 border-t border-border/40 py-6 transition-colors hover:border-foreground/20 md:gap-10">
+                <div className="group flex flex-col gap-2 border-t border-border/40 py-6 transition-colors hover:border-foreground/20 md:flex-row md:items-baseline md:gap-10">
                   <span className="w-24 shrink-0 font-sans text-sm text-muted-foreground">
                     {award.year}
                   </span>
                   <h3 className="flex-1 font-serif text-lg font-light text-foreground transition-opacity group-hover:opacity-70 md:text-xl">
                     {award.title}
                   </h3>
-                  <span className="hidden text-right font-sans text-sm text-muted-foreground md:block">
-                    {award.venue}
-                  </span>
-                  <span className="text-left font-sans text-xs text-muted-foreground md:hidden">
+                  <span className="font-sans text-sm text-muted-foreground md:max-w-[240px] md:text-right">
                     {award.venue}
                   </span>
                 </div>

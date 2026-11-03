@@ -4,13 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import { Send } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
-import { STUDIO_EMAIL, mailtoLink } from "@/lib/site";
-
-const socialLinks = [
-  { label: "Instagram", url: "#", handle: "@assolyaa" },
-  { label: "TikTok", url: "#", handle: "@assolyaa" },
-  { label: "YouTube", url: "#", handle: "Assolyaa" },
-];
+import { STUDIO_EMAIL, mailtoLink, socialLinks } from "@/lib/site";
 
 export default function Contact() {
   const [sending, setSending] = useState(false);
@@ -21,7 +15,14 @@ export default function Contact() {
     const data = new FormData(e.currentTarget);
     const name = String(data.get("name") || "").trim();
     const email = String(data.get("email") || "").trim();
-    const topic = String(data.get("topic") || "");
+    // Use the option's visible text, not its value: the studio should receive
+    // «Заказ картины», not the internal slug "commission".
+    const topicSelect = e.currentTarget.elements.namedItem(
+      "topic",
+    ) as HTMLSelectElement | null;
+    const topic = data.get("topic")
+      ? topicSelect?.selectedOptions[0]?.text.trim() || ""
+      : "";
     const message = String(data.get("message") || "").trim();
     if (!name || !email || !message) return;
     // No form backend yet: hand the message to the studio inbox.
