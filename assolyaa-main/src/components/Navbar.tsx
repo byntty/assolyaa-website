@@ -17,6 +17,9 @@ const navLinks = [
   { label: "Контакты", path: "/contact" },
 ];
 
+/** Sections that stay visible in the desktop bar; the rest live in the menu. */
+const desktopPaths = ["/about", "/order", "/gallery", "/studio", "/contact"];
+
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -49,7 +52,7 @@ export function Navbar() {
             : "bg-transparent"
         }`}
       >
-        <nav className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-5 lg:px-12">
+        <nav className="mx-auto flex max-w-[1400px] items-center justify-between gap-8 px-6 py-5 lg:px-12">
           <Link
             to="/"
             className="font-serif text-xl tracking-[0.08em] uppercase transition-opacity hover:opacity-60"
@@ -57,26 +60,31 @@ export function Navbar() {
             Assolyaa
           </Link>
 
-          {/* Desktop nav — with ten sections the labels stay tight and small */}
-          <div className="hidden items-center gap-4 xl:flex 2xl:gap-6">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`whitespace-nowrap font-sans text-[10px] font-medium uppercase tracking-[0.07em] transition-all duration-300 hover:opacity-60 2xl:text-[11px] 2xl:tracking-[0.09em] ${
-                  location.pathname === link.path ? "opacity-100" : "opacity-70"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
+          {/* Desktop bar — only the five main sections stay visible; everything
+              else (and all sections on narrow screens) lives in the menu. */}
+          <div className="hidden items-center gap-6 lg:flex xl:gap-8">
+            {navLinks
+              .filter((link) => desktopPaths.includes(link.path))
+              .map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`whitespace-nowrap font-sans text-[11px] font-medium uppercase tracking-[0.08em] transition-all duration-300 hover:opacity-60 ${
+                    location.pathname === link.path ? "opacity-100" : "opacity-70"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
           </div>
 
-          {/* Mobile / tablet menu button */}
+          {/* Menu button — holds the remaining sections on desktop and every
+              section on tablet and mobile. */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="relative z-50 flex size-10 items-center justify-center xl:hidden"
-            aria-label="Toggle menu"
+            className="relative z-50 flex size-10 shrink-0 items-center justify-center"
+            aria-label={mobileOpen ? "Закрыть меню" : "Открыть меню"}
+            aria-expanded={mobileOpen}
           >
             {mobileOpen ? (
               <X className="size-5" />

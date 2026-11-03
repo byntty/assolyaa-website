@@ -1,17 +1,18 @@
 {
-  "name": "freebuff.com application",
-  "short_name": "freebuff.com",
-  "description": "freebuff.com application",
-  "start_url": "/",
+  "name": "Assolyaa — картины на ковре",
+  "short_name": "Assolyaa",
+  "description": "Художница Ассоль, автор проекта #KilemArt: картины на ковре, портреты, обучение и арт-инсталляции.",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",
   "icons": [
     {
-      "src": "/logo.png",
+      "src": "logo.svg",
       "sizes": "any",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/svg+xml",
+      "purpose": "any"
     }
   ]
 }
