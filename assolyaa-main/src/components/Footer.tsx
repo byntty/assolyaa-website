@@ -5,6 +5,7 @@ const footerLinks = [
   { label: "Обо мне", path: "/about" },
   { label: "Заказать картину", path: "/order" },
   { label: "Мои картины", path: "/gallery" },
+  { label: "Постеры", path: "/posters" },
   { label: "Реклама", path: "/advertising" },
   { label: "Выставки", path: "/exhibitions" },
   { label: "Обучение", path: "/studio" },

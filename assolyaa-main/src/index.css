@@ -173,11 +173,3 @@ html {
   color: oklch(0.975 0.003 85);
 }
 
-/* Horizontal rails are scrolled with the side arrows, not a scrollbar */
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}

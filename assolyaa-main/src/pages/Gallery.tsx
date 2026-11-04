@@ -5,12 +5,18 @@ import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { ArtworkCard } from "@/components/ArtworkCard";
 import { Lightbox } from "@/components/Lightbox";
-import { artworks, series } from "@/data/artworks";
+import { artworks } from "@/data/artworks";
 import type { Artwork } from "@/components/ArtworkCard";
 
 export default function Gallery() {
   const [activeFilter, setActiveFilter] = useState("Все");
   const [selectedArtwork, setSelectedArtwork] = useState<Artwork | null>(null);
+
+  // The filter row only earns its place when the catalogue really holds more
+  // than one series — otherwise every button would show the same works.
+  const availableSeries = Array.from(new Set(artworks.map((a) => a.series)));
+  const filterOptions = ["Все", ...availableSeries];
+  const showFilters = availableSeries.length > 1;
 
   const filteredArtworks =
     activeFilter === "Все"
@@ -34,23 +40,25 @@ export default function Gallery() {
           </FadeIn>
 
           {/* Filters */}
-          <FadeIn delay={0.1}>
-            <div className="mt-12 flex flex-wrap gap-3">
-              {series.map((s) => (
-                <button
-                  key={s}
-                  onClick={() => setActiveFilter(s)}
-                  className={`border px-5 py-2 font-sans text-[11px] uppercase tracking-[0.12em] transition-all duration-300 ${
-                    activeFilter === s
-                      ? "border-foreground bg-foreground text-background"
-                      : "border-border text-muted-foreground hover:border-foreground/40 hover:text-foreground"
-                  }`}
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
-          </FadeIn>
+          {showFilters && (
+            <FadeIn delay={0.1}>
+              <div className="mt-12 flex flex-wrap gap-3">
+                {filterOptions.map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => setActiveFilter(s)}
+                    className={`border px-5 py-2 font-sans text-[11px] uppercase tracking-[0.12em] transition-all duration-300 ${
+                      activeFilter === s
+                        ? "border-foreground bg-foreground text-background"
+                        : "border-border text-muted-foreground hover:border-foreground/40 hover:text-foreground"
+                    }`}
+                  >
+                    {s}
+                  </button>
+                ))}
+              </div>
+            </FadeIn>
+          )}
         </div>
       </section>
 

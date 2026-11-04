@@ -4,10 +4,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 /** Main menu — order and labels are part of the site contract. */
-const navLinks = [
+export const navLinks = [
   { label: "Обо мне", path: "/about" },
   { label: "Заказать картину", path: "/order" },
   { label: "Мои картины", path: "/gallery" },
+  { label: "Постеры и мерч", path: "/posters" },
   { label: "Реклама и коллаборации", path: "/advertising" },
   { label: "Выставки", path: "/exhibitions" },
   { label: "Обучение", path: "/studio" },
@@ -16,9 +17,6 @@ const navLinks = [
   { label: "СМИ", path: "/press" },
   { label: "Контакты", path: "/contact" },
 ];
-
-/** Sections that stay visible in the desktop bar; the rest live in the menu. */
-const desktopPaths = ["/about", "/order", "/gallery", "/studio", "/contact"];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -60,26 +58,7 @@ export function Navbar() {
             Assolyaa
           </Link>
 
-          {/* Desktop bar — only the five main sections stay visible; everything
-              else (and all sections on narrow screens) lives in the menu. */}
-          <div className="hidden items-center gap-6 lg:flex xl:gap-8">
-            {navLinks
-              .filter((link) => desktopPaths.includes(link.path))
-              .map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={`whitespace-nowrap font-sans text-[11px] font-medium uppercase tracking-[0.08em] transition-all duration-300 hover:opacity-60 ${
-                    location.pathname === link.path ? "opacity-100" : "opacity-70"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              ))}
-          </div>
-
-          {/* Menu button — holds the remaining sections on desktop and every
-              section on tablet and mobile. */}
+          {/* Every section lives in the menu, on desktop as well. */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className="relative z-50 flex size-10 shrink-0 items-center justify-center"

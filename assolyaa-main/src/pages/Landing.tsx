@@ -1,144 +1,83 @@
-import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { FadeIn } from "@/components/FadeIn";
 import { Footer } from "@/components/Footer";
-import { Navbar } from "@/components/Navbar";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { Navbar, navLinks } from "@/components/Navbar";
+import { ArrowRight } from "lucide-react";
 import { assetUrl } from "@/lib/assets";
+import { socialLinks } from "@/lib/site";
 
-/** The main screen keeps only the five original section cards. */
-const navCards = [
-  {
-    label: "Обо мне",
-    path: "/about",
-    image: assetUrl("images/card-about.jpeg"),
-  },
-  {
-    label: "Мои картины",
-    path: "/gallery",
-    image: assetUrl("images/card-gallery.jpg"),
-  },
-  {
-    label: "Реклама и коллаборации",
-    path: "/advertising",
-    image: assetUrl("images/fillers/adv.jpg"),
-  },
-  {
-    label: "Обучение",
-    path: "/studio",
-    image: assetUrl("images/card-studio.jpg"),
-  },
-  {
-    label: "СМИ",
-    path: "/press",
-    image: assetUrl("images/card-press.jpg"),
-  },
-];
+/** One card per menu section — same list as the burger menu, nothing missing. */
+const cardImages: Record<string, string> = {
+  "/about": assetUrl("images/card-about.jpeg"),
+  "/order": assetUrl("images/fillers/artist-work.jpg"),
+  "/gallery": assetUrl("images/card-gallery.jpg"),
+  "/advertising": assetUrl("images/fillers/adv.jpg"),
+  "/exhibitions": assetUrl("images/fillers/exhib-room.jpg"),
+  "/studio": assetUrl("images/card-studio.jpg"),
+  "/events": assetUrl("images/fillers/live.jpg"),
+  "/installations": assetUrl("images/fillers/mural.jpg"),
+  "/posters": assetUrl("images/posters/umay-1.jpg"),
+  "/press": assetUrl("images/card-press.jpg"),
+};
 
 export default function Landing() {
-  const railRef = useRef<HTMLDivElement>(null);
-  const [atStart, setAtStart] = useState(true);
-  const [atEnd, setAtEnd] = useState(false);
-
-  // Arrows stay in sync with the rail: disabled when there is nothing to
-  // reveal in that direction (e.g. all cards fit on a very wide screen).
-  const syncArrows = useCallback(() => {
-    const rail = railRef.current;
-    if (!rail) return;
-    setAtStart(rail.scrollLeft <= 4);
-    setAtEnd(rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 4);
-  }, []);
-
-  useEffect(() => {
-    const rail = railRef.current;
-    if (!rail) return;
-    syncArrows();
-    rail.addEventListener("scroll", syncArrows, { passive: true });
-    const observer = new ResizeObserver(syncArrows);
-    observer.observe(rail);
-    window.addEventListener("resize", syncArrows);
-    return () => {
-      rail.removeEventListener("scroll", syncArrows);
-      observer.disconnect();
-      window.removeEventListener("resize", syncArrows);
-    };
-  }, [syncArrows]);
-
-  /** Scroll the rail by exactly one card, so the cards stay aligned to the grid. */
-  const scrollRail = (direction: -1 | 1) => {
-    const rail = railRef.current;
-    if (!rail) return;
-    const card = rail.querySelector<HTMLElement>("[data-card]");
-    const gap = parseFloat(getComputedStyle(rail).columnGap) || 24;
-    const step = card ? card.getBoundingClientRect().width + gap : rail.clientWidth * 0.8;
-    rail.scrollBy({ left: direction * step, behavior: "smooth" });
-  };
-
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
 
+      {/* The page title for search engines and screen readers; the visual
+          hierarchy starts with the section cards below. */}
+      <h1 className="sr-only">
+        Assolyaa — картины на ковре ручной работы, Асель Сабыржанқызы
+      </h1>
+
       {/* ─── Section cards ─── */}
       <section className="px-6 pt-28 pb-20 lg:px-12 lg:pt-32">
         <div className="mx-auto max-w-[1400px]">
-          <div className="relative">
-            <button
-              type="button"
-              onClick={() => scrollRail(-1)}
-              disabled={atStart}
-              aria-label="Предыдущие разделы"
-              className="absolute -left-5 top-1/2 z-10 hidden size-11 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background text-foreground transition-all duration-300 hover:border-foreground hover:bg-foreground hover:text-background disabled:pointer-events-none disabled:opacity-25 lg:flex"
-            >
-              <ChevronLeft className="size-4" strokeWidth={1.25} />
-            </button>
+          {/* Profiles sit right above the cards */}
+          <div className="mb-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 border-b border-border/50 pb-6">
+            {socialLinks.map((social) => (
+              <a
+                key={social.label}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-sans text-[11px] uppercase tracking-[0.15em] text-muted-foreground transition-colors duration-300 hover:text-foreground"
+              >
+                {social.label}
+              </a>
+            ))}
+          </div>
 
-            {/* One row of cards — the side arrows replace the extra row. The
-                rail spans the full container width, so the cards keep the size
-                they had in the old four-column grid. */}
-            <div
-              ref={railRef}
-              className="no-scrollbar flex snap-x snap-proximity gap-6 overflow-x-auto scroll-smooth xl:gap-8"
-            >
-              {navCards.map((card, i) => (
-                <FadeIn
-                  key={card.path}
-                  delay={i * 0.06}
-                  className="w-[82%] shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)] xl:w-[calc((100%-6rem)/4)]"
-                >
-                  <Link to={card.path} data-card className="group block">
-                    <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-parchment">
-                      <img
-                        src={card.image}
-                        alt={card.label}
-                        loading={i < 4 ? "eager" : "lazy"}
-                        className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
-                      />
-                      {/* Shadow gradient at bottom */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent" />
-                      {/* Label and arrow */}
-                      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6">
-                        <h3 className="font-serif text-2xl font-light leading-tight text-ivory">
-                          {card.label}
-                        </h3>
-                        <span className="mb-1 flex size-9 shrink-0 items-center justify-center rounded-full border border-ivory/50 text-ivory transition-colors duration-300 group-hover:border-ivory group-hover:bg-ivory group-hover:text-foreground">
-                          <ArrowRight className="size-3.5" strokeWidth={1.25} />
-                        </span>
-                      </div>
+          <div className="grid gap-6 sm:grid-cols-2 xl:gap-8 lg:grid-cols-3 xl:grid-cols-4">
+            {navLinks
+              // Contacts already sit in the bar, so they stay off the grid.
+              .filter((card) => card.path !== "/contact")
+              .map((card, i) => (
+              <FadeIn key={card.path} delay={i * 0.06}>
+                <Link to={card.path} className="group block">
+                  <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-parchment">
+                    <img
+                      src={cardImages[card.path]}
+                      alt={card.label}
+                      loading={i < 4 ? "eager" : "lazy"}
+                      className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
+                    />
+                    {/* Shadow gradient at bottom */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent" />
+                    {/* Label and arrow */}
+                    <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6">
+                      <h3 className="font-serif text-2xl font-light leading-tight text-ivory">
+                        {card.label}
+                      </h3>
+                      <span className="mb-1 flex size-9 shrink-0 items-center justify-center rounded-full border border-ivory/50 text-ivory transition-colors duration-300 group-hover:border-ivory group-hover:bg-ivory group-hover:text-foreground">
+                        <ArrowRight className="size-3.5" strokeWidth={1.25} />
+                      </span>
                     </div>
-                  </Link>
-                </FadeIn>
-              ))}
-            </div>
-
-            <button
-              type="button"
-              onClick={() => scrollRail(1)}
-              disabled={atEnd}
-              aria-label="Следующие разделы"
-              className="absolute -right-5 top-1/2 z-10 hidden size-11 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-background text-foreground transition-all duration-300 hover:border-foreground hover:bg-foreground hover:text-background disabled:pointer-events-none disabled:opacity-25 lg:flex"
-            >
-              <ChevronRight className="size-4" strokeWidth={1.25} />
-            </button>
+                  </div>
+                </Link>
+              </FadeIn>
+            ))}
           </div>
         </div>
       </section>

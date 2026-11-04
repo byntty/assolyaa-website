@@ -25,6 +25,7 @@ const OrderPage = lazy(() => import("./pages/Order.tsx"));
 const ExhibitionsPage = lazy(() => import("./pages/Exhibitions.tsx"));
 const EventsPage = lazy(() => import("./pages/Events.tsx"));
 const InstallationsPage = lazy(() => import("./pages/Installations.tsx"));
+const PostersPage = lazy(() => import("./pages/Posters.tsx"));
 
 // Simple loading fallback for route transitions
 function RouteLoading() {
@@ -105,6 +106,7 @@ function AppRoutes() {
         <Route path="/" element={<Landing />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/gallery" element={<GalleryPage />} />
+        <Route path="/posters" element={<PostersPage />} />
         <Route path="/press" element={<PressPage />} />
         <Route path="/studio" element={<StudioPage />} />
         <Route path="/order" element={<OrderPage />} />
