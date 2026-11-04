@@ -51,8 +51,9 @@ export default function Landing() {
 
           <div className="grid gap-6 sm:grid-cols-2 xl:gap-8 lg:grid-cols-3 xl:grid-cols-4">
             {navLinks
-              // Contacts already sit in the bar, so they stay off the grid.
-              .filter((card) => card.path !== "/contact")
+              // Contacts sit in the menu, and «Главное» is this very page, so
+              // neither gets its own card.
+              .filter((card) => card.path !== "/contact" && card.path !== "/")
               .map((card, i) => (
               <FadeIn key={card.path} delay={i * 0.06}>
                 <Link to={card.path} className="group block">

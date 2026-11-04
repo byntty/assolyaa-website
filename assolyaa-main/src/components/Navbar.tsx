@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react";
 
 /** Main menu — order and labels are part of the site contract. */
 export const navLinks = [
+  { label: "Главное", path: "/" },
   { label: "Обо мне", path: "/about" },
   { label: "Заказать картину", path: "/order" },
   { label: "Мои картины", path: "/gallery" },
