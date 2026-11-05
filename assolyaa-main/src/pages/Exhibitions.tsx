@@ -24,15 +24,14 @@ interface Exhibition {
 const upcoming: Exhibition = {
   id: "kilemart-2026",
   year: "2026",
-  title: "Выставка картин на коврах",
+  title: "ARQAU / THREADS",
   city: "Астана, Казахстан",
-  dates: "7.11.2026 — 22.11.2026",
-  venue: "Qazaq Creative Hub",
-  address: "г. Астана, р-н Есил, ул. Жошы хана, 16/2",
+  dates: "15.11.2026 — 27.11.2026",
+  venue: "Персональная выставка",
   description:
     "Новая серия работ Ассоль — это диалог традиций и современности, где древний ковёр становится холстом для новых историй. Персональная экспозиция объединяет ковровые портреты серии «Женщины Великой степи» и новые работы, созданные в 2026 году.",
   images: [
-    "fillers/exhib-room.jpg",
+    "exhibitions/hero-room.jpg",
     "artwork-01.jpg",
     "artwork-05.jpg",
     "artwork-12.jpg",
@@ -49,7 +48,7 @@ const pastExhibitions: Exhibition[] = [
     venue: "Ичеришехер — комплекс Дворца бакинских ханов",
     description:
       "Персональная экспозиция в рамках крупнейшего международного форума ковроделия. Британское издание The Independent включило творчество Ассоль в обзор фестиваля как одно из ярчайших явлений события.",
-    images: ["fillers/exhib-textiles.jpg", "artwork-01.jpg", "artwork-13.jpg"],
+    images: ["exhibitions/photo-textiles.jpg", "artwork-01.jpg", "artwork-13.jpg"],
   },
   {
     id: "salon-automne-2024",
@@ -60,14 +59,14 @@ const pastExhibitions: Exhibition[] = [
     venue: "Юбилейный салон",
     description:
       "Участие в одном из старейших художественных салонов мира. В рамках программы — публичный арт-перформанс: за несколько часов портрет Симоны Вейль написан на ковре при зрителях.",
-    images: ["fillers/exhib-wine.jpg", "fillers/gallery-vis.jpg"],
+    images: ["exhibitions/photo-wine.jpg", "exhibitions/photo-visitors.jpg"],
   },
   {
     id: "heydar-aliyev-2023",
     year: "2023",
     title: "Дни культуры Казахстана",
     city: "Баку, Азербайджан",
-    dates: "Ноябрь–декабрь 2023",
+    dates: "2–5 декабря 2023",
     venue: "Центр Гейдара Алиева",
     description:
       "Ковровые образы и портрет поэтессы Натаван в рамках официальной программы Дней культуры Казахстана.",
@@ -82,15 +81,15 @@ const pastExhibitions: Exhibition[] = [
     venue: "Выставка в период государственного визита Президента Франции",
     description:
       "Экспозиция традиционного и современного казахского искусства во время государственного визита Эмманюэля Макрона.",
-    images: ["fillers/festival.jpg", "artwork-04.jpg"],
+    images: ["exhibitions/photo-festival.jpg", "artwork-04.jpg"],
   },
   {
     id: "berlin-bazaar-2023",
     year: "2023",
     title: "Berlin Bazaar",
     city: "Берлин, Германия",
-    dates: "2023",
-    venue: "Международная ярмарка современного искусства",
+    dates: "8–13 ноября 2023",
+    venue: "Казахстанский павильон",
     description:
       "Показ ковровых портретов европейской аудитории в рамках международной ярмарки искусства.",
     images: ["artwork-05.jpg", "artwork-06.jpg"],
@@ -100,10 +99,10 @@ const pastExhibitions: Exhibition[] = [
     year: "2023",
     title: "Carpet Art «Qazaq Content»",
     city: "Астана, Казахстан",
-    dates: "Сентябрь 2023",
+    dates: "21 сентября — 6 ноября 2023",
     venue: "Forte Kulanshi Art Space",
     description:
-      "Первая системная выставка авторского направления: 14 ковровых полотен серии «Женщины Великой степи».",
+      "Первая системная выставка авторского направления: 14 ковровых полотен серии «Женщины Великой степи». Выставку посетили более 20 000 человек.",
     images: ["artwork-01.jpg", "artwork-07.jpg", "artwork-08.jpg"],
   },
   {
@@ -115,7 +114,7 @@ const pastExhibitions: Exhibition[] = [
     venue: "Персональная экспозиция",
     description:
       "Экспозиция в рамках Central Asia Fashion: соединение традиционного казахского кода и современного fashion-контекста.",
-    images: ["fillers/carpet.jpg", "artwork-09.jpg"],
+    images: ["exhibitions/photo-carpet-detail.jpg", "artwork-09.jpg"],
   },
 ];
 
@@ -145,7 +144,7 @@ export default function Exhibitions() {
       <section className="relative min-h-[64vh] overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src={IMG("hero.jpg")}
+            src={IMG("exhibitions/hero-qazaq-content.jpg")}
             alt="Гости смотрят ковровые работы на выставке"
             className="h-full w-full object-cover"
           />

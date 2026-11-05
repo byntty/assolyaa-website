@@ -8,16 +8,16 @@ import { socialLinks } from "@/lib/site";
 
 /** One card per menu section — same list as the burger menu, nothing missing. */
 const cardImages: Record<string, string> = {
-  "/about": assetUrl("images/card-about.jpeg"),
-  "/order": assetUrl("images/fillers/artist-work.jpg"),
-  "/gallery": assetUrl("images/card-gallery.jpg"),
-  "/advertising": assetUrl("images/fillers/adv.jpg"),
-  "/exhibitions": assetUrl("images/fillers/exhib-room.jpg"),
-  "/studio": assetUrl("images/card-studio.jpg"),
-  "/events": assetUrl("images/fillers/live.jpg"),
-  "/installations": assetUrl("images/fillers/mural.jpg"),
-  "/posters": assetUrl("images/posters/umay-1.jpg"),
-  "/press": assetUrl("images/card-press.jpg"),
+  "/about": assetUrl("images/cards/about.jpg"),
+  "/order": assetUrl("images/events/photo-artist-at-work.jpg"),
+  "/gallery": assetUrl("images/cards/gallery.jpg"),
+  "/advertising": assetUrl("images/advertising/card-collaboration.jpg"),
+  "/exhibitions": assetUrl("images/exhibitions/hero-room.jpg"),
+  "/studio": assetUrl("images/cards/studio.jpg"),
+  "/events": assetUrl("images/events/card-live-painting.jpg"),
+  "/installations": assetUrl("images/installations/hero-mural.jpg"),
+  "/posters": assetUrl("images/posters/umay/version-1.jpg"),
+  "/press": assetUrl("images/cards/press.jpg"),
 };
 
 export default function Landing() {

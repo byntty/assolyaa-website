@@ -668,7 +668,7 @@ export default function Advertising() {
           <FadeIn className="lg:col-span-7">
             <div className="group overflow-hidden bg-parchment">
               <img
-                src={IMG("fillers/brush.jpg")}
+                src={IMG("advertising/hero-brush.jpg")}
                 alt="Работа над картиной"
                 loading="lazy"
                 className="aspect-[16/10] w-full object-cover transition-transform duration-[1600ms] ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-[1.03]"

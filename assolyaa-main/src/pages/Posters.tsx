@@ -10,26 +10,26 @@ const IMG = (file: string) => assetUrl(`images/${file}`);
 type Poster = {
   title: string;
   /** Placeholder shots downloaded from the internet — replace with real
-   *  poster photography later, three views per poster. */
+   *  poster photography later, three variants per poster. */
   versions: [string, string, string];
 };
 
 const posters: Poster[] = [
   {
     title: "Постер «Умай»",
-    versions: ["posters/umay-1.jpg", "posters/umay-2.jpg", "posters/umay-3.jpg"],
+    versions: ["posters/umay/version-1.jpg", "posters/umay/version-2.jpg", "posters/umay/version-3.jpg"],
   },
   {
     title: "Постер «Steppe Freedom»",
-    versions: ["posters/steppe-1.jpg", "posters/steppe-2.jpg", "posters/steppe-3.jpg"],
+    versions: ["posters/steppe-freedom/version-1.jpg", "posters/steppe-freedom/version-2.jpg", "posters/steppe-freedom/version-3.jpg"],
   },
   {
     title: "Постер «На встречу ветру»",
-    versions: ["posters/wind-1.jpg", "posters/wind-2.jpg", "posters/wind-3.jpg"],
+    versions: ["posters/wind/version-1.jpg", "posters/wind/version-2.jpg", "posters/wind/version-3.jpg"],
   },
   {
     title: "Постер «В цвета́х»",
-    versions: ["posters/flowers-1.jpg", "posters/flowers-2.jpg", "posters/flowers-3.jpg"],
+    versions: ["posters/flowers/version-1.jpg", "posters/flowers/version-2.jpg", "posters/flowers/version-3.jpg"],
   },
 ];
 
@@ -87,7 +87,7 @@ export default function Posters() {
             </h1>
             <p className="mt-6 max-w-xl font-sans text-sm leading-[1.9] text-muted-foreground">
               Печатные работы Ассоль на дизайнерском льне — с рамкой, паспарту и
-              автографом. Нажмите на постер, чтобы рассмотреть три версии.
+              автографом. Нажмите на постер, чтобы рассмотреть все варианты.
             </p>
           </FadeIn>
         </div>
@@ -120,7 +120,7 @@ export default function Posters() {
                     {/* Hint that slides up on hover */}
                     <span className="pointer-events-none absolute inset-x-0 bottom-0 flex translate-y-3 items-center justify-between gap-3 bg-gradient-to-t from-black/60 to-transparent p-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
                       <span className="font-sans text-[10px] uppercase tracking-[0.15em] text-ivory">
-                        Три версии
+                        Варианты
                       </span>
                       <ArrowRight className="size-3.5 text-ivory" strokeWidth={1.25} />
                     </span>
@@ -161,12 +161,12 @@ export default function Posters() {
                 onClick={(event) => event.stopPropagation()}
                 className="flex w-full max-w-[1200px] flex-col items-center gap-10 duration-400 animate-in fade-in-0 zoom-in-95 slide-in-from-bottom-2 lg:flex-row lg:items-start lg:gap-16"
               >
-                {/* Versions */}
+                {/* Variants */}
                 <div className="flex w-full flex-1 flex-col items-center">
                   <img
                     key={active.versions[version]}
                     src={IMG(active.versions[version])}
-                    alt={`${active.title} — версия ${version + 1}`}
+                    alt={`${active.title} — вариант ${version + 1}`}
                     className="max-h-[58vh] w-auto max-w-full object-contain duration-300 animate-in fade-in lg:max-h-[70vh]"
                   />
 
@@ -176,7 +176,7 @@ export default function Posters() {
                         key={file}
                         type="button"
                         onClick={() => setVersion(index)}
-                        aria-label={`Версия ${index + 1}`}
+                        aria-label={`Вариант ${index + 1}`}
                         aria-pressed={version === index}
                         className={`size-16 overflow-hidden rounded-lg border transition-all duration-300 hover:scale-105 active:scale-95 ${
                           version === index

@@ -53,7 +53,7 @@ export default function Installations() {
       <section className="relative min-h-[52vh] overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src={IMG("fillers/mural.jpg")}
+            src={IMG("installations/hero-mural.jpg")}
             alt="Мурал на стене здания"
             className="h-full w-full object-cover object-[center_30%]"
           />

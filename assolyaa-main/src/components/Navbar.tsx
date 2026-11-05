@@ -5,7 +5,7 @@ import { Menu, X } from "lucide-react";
 
 /** Main menu — order and labels are part of the site contract. */
 export const navLinks = [
-  { label: "Главное", path: "/" },
+  { label: "Главная", path: "/" },
   { label: "Обо мне", path: "/about" },
   { label: "Заказать картину", path: "/order" },
   { label: "Мои картины", path: "/gallery" },
@@ -95,6 +95,9 @@ export function Navbar() {
                 >
                   <Link
                     to={link.path}
+                    // Close on every click, including links to the page already
+                    // open — otherwise the overlay just stays there.
+                    onClick={() => setMobileOpen(false)}
                     className={`font-serif text-2xl tracking-wide transition-opacity hover:opacity-60 lg:text-3xl ${
                       location.pathname === link.path
                         ? "opacity-100"

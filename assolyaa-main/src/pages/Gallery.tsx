@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { FadeIn } from "@/components/FadeIn";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
@@ -8,27 +7,44 @@ import { Lightbox } from "@/components/Lightbox";
 import { artworks } from "@/data/artworks";
 import type { Artwork } from "@/components/ArtworkCard";
 
+/** How many works the page shows before the visitor picks a sort. */
+const FEATURED_COUNT = 6;
+
+type SortMode = "all" | "available" | "sold" | "latest";
+
+const sorts: { key: SortMode; label: string }[] = [
+  { key: "all", label: "Все" },
+  { key: "available", label: "В наличии" },
+  { key: "sold", label: "Распродано" },
+  { key: "latest", label: "Последние" },
+];
+
+/** Release order used by «Последние». The carpet series is dated only by year
+ *  (the studio publishes no per-work dates), so the newest catalogue entry
+ *  comes first once the years tie. */
+const byRelease = [...artworks].sort(
+  (a, b) => Number(b.year) - Number(a.year) || Number(b.id) - Number(a.id),
+);
+
 export default function Gallery() {
-  const [activeFilter, setActiveFilter] = useState("Все");
+  const [sort, setSort] = useState<SortMode | null>(null);
   const [selectedArtwork, setSelectedArtwork] = useState<Artwork | null>(null);
 
-  // The filter row only earns its place when the catalogue really holds more
-  // than one series — otherwise every button would show the same works.
-  const availableSeries = Array.from(new Set(artworks.map((a) => a.series)));
-  const filterOptions = ["Все", ...availableSeries];
-  const showFilters = availableSeries.length > 1;
-
-  const filteredArtworks =
-    activeFilter === "Все"
-      ? artworks
-      : artworks.filter((a) => a.series === activeFilter);
+  const shownArtworks =
+    sort === null
+      ? artworks.slice(0, FEATURED_COUNT)
+      : sort === "all"
+        ? artworks
+        : sort === "latest"
+          ? byRelease
+          : artworks.filter((a) => a.status === sort);
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
 
       {/* Hero */}
-      <section className="pt-32 pb-16">
+      <section className="pt-32 pb-10 lg:pb-14">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
           <FadeIn>
             <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
@@ -39,56 +55,56 @@ export default function Gallery() {
             </h1>
           </FadeIn>
 
-          {/* Filters */}
-          {showFilters && (
-            <FadeIn delay={0.1}>
-              <div className="mt-12 flex flex-wrap gap-3">
-                {filterOptions.map((s) => (
-                  <button
-                    key={s}
-                    onClick={() => setActiveFilter(s)}
-                    className={`border px-5 py-2 font-sans text-[11px] uppercase tracking-[0.12em] transition-all duration-300 ${
-                      activeFilter === s
-                        ? "border-foreground bg-foreground text-background"
-                        : "border-border text-muted-foreground hover:border-foreground/40 hover:text-foreground"
-                    }`}
-                  >
-                    {s}
-                  </button>
-                ))}
-              </div>
-            </FadeIn>
-          )}
+          {/* Sort row — it is also the way to the rest of the catalogue */}
+          <FadeIn delay={0.1}>
+            <div className="mt-10 flex flex-wrap items-center gap-3">
+              {sorts.map((option) => (
+                <button
+                  key={option.key}
+                  onClick={() => setSort(sort === option.key ? null : option.key)}
+                  aria-pressed={sort === option.key}
+                  className={`border px-5 py-2 font-sans text-[11px] uppercase tracking-[0.12em] transition-all duration-300 ${
+                    sort === option.key
+                      ? "border-foreground bg-foreground text-background"
+                      : "border-border text-muted-foreground hover:border-foreground/40 hover:text-foreground"
+                  }`}
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
+            <p className="mt-5 font-sans text-[11px] uppercase tracking-[0.12em] text-muted-foreground">
+              {sort === null
+                ? `Показаны ${shownArtworks.length} из ${artworks.length} работ — выберите сортировку, чтобы увидеть остальные`
+                : `Показаны ${shownArtworks.length} из ${artworks.length} работ`}
+            </p>
+          </FadeIn>
         </div>
       </section>
 
-      {/* Grid */}
+      {/* Grid — two columns on phones, three from lg */}
       <section className="px-6 pb-24 lg:px-12">
         <div className="mx-auto max-w-[1400px]">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeFilter}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
-            >
-              {filteredArtworks.map((work, i) => (
-                <ArtworkCard
-                  key={work.id}
-                  artwork={work}
-                  index={i}
-                  onClick={() => setSelectedArtwork(work)}
-                />
-              ))}
-            </motion.div>
-          </AnimatePresence>
+          {/* Re-keyed on the sort so each set fades in without waiting on an
+              exit animation that a backgrounded tab would never finish. */}
+          <div
+            key={sort ?? "featured"}
+            className="grid animate-in fade-in grid-cols-2 gap-x-4 gap-y-10 duration-300 sm:gap-x-6 lg:grid-cols-3 lg:gap-x-10 lg:gap-y-16"
+          >
+            {shownArtworks.map((work, i) => (
+              <ArtworkCard
+                key={work.id}
+                artwork={work}
+                index={i}
+                onClick={() => setSelectedArtwork(work)}
+              />
+            ))}
+          </div>
 
-          {filteredArtworks.length === 0 && (
+          {shownArtworks.length === 0 && (
             <div className="py-32 text-center">
               <p className="font-sans text-sm text-muted-foreground">
-                Работы в этой серии пока не добавлены.
+                Работ в этой категории пока нет.
               </p>
             </div>
           )}

@@ -32,7 +32,7 @@ const educationPrograms: {
     age: "6–11 лет",
     price: "45 000 ₸ / мес.",
     details: ["6–11 лет", "8 занятий в месяц", "материалы включены"],
-    image: "fillers/kids.jpg",
+    image: "studio/lesson-kids.jpg",
     imageAlt: "Творческий процесс в студии Assolyaa",
     intro: "На занятиях дети:",
     bullets: [
@@ -50,7 +50,7 @@ const educationPrograms: {
     age: "10–17 лет",
     price: "45 000 ₸ / мес.",
     details: ["10–17 лет", "8 занятий в месяц", "материалы включены"],
-    image: "fillers/teens.jpg",
+    image: "studio/lesson-teens.jpg",
     imageAlt: "Ученица на занятии",
     intro:
       "Программа адаптирована под возраст и уровень подготовки ученика. На занятиях:",
@@ -73,7 +73,7 @@ const educationPrograms: {
       "занятия по субботам и воскресеньям",
       "материалы включены",
     ],
-    image: "fillers/adults.jpg",
+    image: "studio/lesson-adults.jpg",
     imageAlt: "Ассоль за работой над картиной",
     intro:
       "Подходит как для начинающих, так и для тех, кто уже имеет опыт в рисовании. На занятиях можно освоить:",
@@ -92,7 +92,7 @@ const educationPrograms: {
     age: "Подготовка к поступлению",
     price: "55 000 ₸ / мес.",
     details: ["8 занятий в месяц", "материалы включены"],
-    image: "fillers/sketch.jpg",
+    image: "studio/lesson-sketching.jpg",
     imageAlt: "Академический рисунок",
     intro:
       "Курс направлен на системную подготовку и создание портфолио для поступления. В программе:",
@@ -149,11 +149,11 @@ const educationFaq = [
 ];
 
 const atmosphere = [
-  { file: "fillers/studio-int.jpg", alt: "Краски и материалы в мастерской" },
-  { file: "fillers/palette.jpg", alt: "Палитра художницы" },
-  { file: "fillers/studio-plant.jpg", alt: "Мольберт у окна мастерской" },
+  { file: "studio/photo-workshop-paints.jpg", alt: "Краски и материалы в мастерской" },
+  { file: "studio/photo-palette.jpg", alt: "Палитра художницы" },
+  { file: "studio/photo-easel-window.jpg", alt: "Мольберт у окна мастерской" },
   { file: "artwork-13.jpg", alt: "Картина на ковре «Барыс-қыз»" },
-  { file: "fillers/artist.jpg", alt: "Художница с палитрой" },
+  { file: "studio/photo-artist-palette.jpg", alt: "Художница с палитрой" },
 ];
 
 export default function Studio() {
@@ -183,7 +183,7 @@ export default function Studio() {
       {/* ─── Hero ─── */}
       <section className="relative min-h-[78vh] overflow-hidden">
         <img
-          src={IMG("card-studio.jpg")}
+          src={IMG("cards/studio.jpg")}
           alt="Художественная студия Assolyaa"
           className="absolute inset-0 h-full w-full object-cover object-[center_35%]"
         />
@@ -365,7 +365,7 @@ export default function Studio() {
             <div className="mt-8 grid items-center gap-8 rounded-3xl border border-border/60 bg-card p-8 md:grid-cols-[auto_1fr] md:p-10">
               <div className="size-28 overflow-hidden rounded-2xl bg-parchment md:size-36">
                 <img
-                  src={IMG("card-gallery.jpg")}
+                  src={IMG("cards/gallery.jpg")}
                   alt="Процесс создания картины на ковре"
                   loading="lazy"
                   className="h-full w-full object-cover"

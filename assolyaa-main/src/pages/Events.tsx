@@ -21,19 +21,19 @@ const formats = [
   {
     title: "Живая живопись",
     text: "Ассоль создаёт картину на глазах у гостей — зрители видят, как работа рождается в реальном времени.",
-    image: "fillers/live.jpg",
+    image: "events/card-live-painting.jpg",
     alt: "Арт-перформанс перед зрителями",
   },
   {
     title: "Совместная картина",
     text: "Гости мероприятия вместе с Ассоль добавляют штрихи к общей работе — уникальный памятный арт-объект события.",
-    image: "fillers/joint.jpg",
+    image: "events/card-joint-session.jpg",
     alt: "Совместная работа над картиной",
   },
   {
     title: "Экспресс-портреты",
     text: "Мини-портреты гостей за короткое время: персональный сувенир, который остаётся с каждым участником.",
-    image: "fillers/express.jpg",
+    image: "events/card-express-masterclass.jpg",
     alt: "Экспресс-портрет",
   },
 ];
@@ -46,13 +46,13 @@ const eventTypes = [
 ];
 
 const gallery = [
-  { file: "fillers/exhib-opening.jpg", alt: "Гости на открытии выставки" },
+  { file: "events/photo-guests-opening.jpg", alt: "Гости на открытии выставки" },
   {
-    file: "fillers/artist-work.jpg",
+    file: "events/photo-artist-at-work.jpg",
     alt: "Художница и готовая работа",
   },
   {
-    file: "fillers/woman-artist.jpg",
+    file: "events/photo-woman-artist.jpg",
     alt: "Художница с готовой работой",
   },
 ];
@@ -73,7 +73,7 @@ export default function Events() {
       {/* ─── Hero ─── */}
       <section className="relative min-h-[82vh] overflow-hidden">
         <img
-          src={IMG("fillers/gallery-open.jpg")}
+          src={IMG("events/hero-opening.jpg")}
           alt="Художница пишет картину на мольберте"
           className="absolute inset-0 h-full w-full object-cover object-[center_25%]"
         />
@@ -268,7 +268,7 @@ export default function Events() {
             <FadeIn>
               <div className="overflow-hidden rounded-3xl bg-parchment">
                 <img
-                  src={IMG("fillers/smartphone.jpg")}
+                  src={IMG("events/photo-phone-painting.jpg")}
                   alt="Съёмка перформанса для Stories"
                   loading="lazy"
                   className="aspect-[16/10] w-full object-cover object-top"
