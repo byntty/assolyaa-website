@@ -3,33 +3,48 @@ import { FadeIn } from "@/components/FadeIn";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { assetUrl } from "@/lib/assets";
+import { Link } from "react-router";
 import { ArrowRight, X } from "lucide-react";
 
 const IMG = (file: string) => assetUrl(`images/${file}`);
 
 type Poster = {
   title: string;
-  /** Placeholder shots downloaded from the internet — replace with real
-   *  poster photography later, three variants per poster. */
   versions: [string, string, string];
 };
 
 const posters: Poster[] = [
   {
     title: "Постер «Умай»",
-    versions: ["posters/umay/version-1.jpg", "posters/umay/version-2.jpg", "posters/umay/version-3.jpg"],
+    versions: [
+      "posters/umay/version-1.jpg",
+      "posters/umay/version-2.jpg",
+      "posters/umay/version-3.jpg",
+    ],
   },
   {
     title: "Постер «Steppe Freedom»",
-    versions: ["posters/steppe-freedom/version-1.jpg", "posters/steppe-freedom/version-2.jpg", "posters/steppe-freedom/version-3.jpg"],
+    versions: [
+      "posters/steppe-freedom/version-1.jpg",
+      "posters/steppe-freedom/version-2.jpg",
+      "posters/steppe-freedom/version-3.jpg",
+    ],
   },
   {
     title: "Постер «На встречу ветру»",
-    versions: ["posters/wind/version-1.jpg", "posters/wind/version-2.jpg", "posters/wind/version-3.jpg"],
+    versions: [
+      "posters/wind/version-1.jpg",
+      "posters/wind/version-2.jpg",
+      "posters/wind/version-3.jpg",
+    ],
   },
   {
     title: "Постер «В цвета́х»",
-    versions: ["posters/flowers/version-1.jpg", "posters/flowers/version-2.jpg", "posters/flowers/version-3.jpg"],
+    versions: [
+      "posters/flowers/version-1.jpg",
+      "posters/flowers/version-2.jpg",
+      "posters/flowers/version-3.jpg",
+    ],
   },
 ];
 
@@ -52,7 +67,6 @@ export default function Posters() {
   const [active, setActive] = useState<Poster | null>(null);
   const [version, setVersion] = useState(0);
 
-  // Escape closes the overlay and the page behind it never scrolls.
   useEffect(() => {
     if (!active) return;
     document.body.style.overflow = "hidden";
@@ -75,7 +89,7 @@ export default function Posters() {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      {/* ─── Hero ─── */}
+      {/* Hero */}
       <section className="px-6 pt-32 pb-12 lg:px-12 lg:pb-16">
         <div className="mx-auto max-w-[1400px]">
           <FadeIn>
@@ -93,49 +107,73 @@ export default function Posters() {
         </div>
       </section>
 
-      {/* ─── Catalogue ─── */}
+      {/* Catalogue */}
       <section className="px-6 pb-24 lg:px-12">
         <div className="mx-auto max-w-[1400px]">
           <div className="grid grid-cols-2 gap-x-4 gap-y-10 md:gap-x-6 lg:grid-cols-3 lg:gap-x-8">
             {posters.map((poster, i) => (
               <FadeIn key={poster.title} delay={i * 0.06}>
-                <button
-                  type="button"
-                  onClick={() => openPoster(poster)}
-                  className="group block w-full text-left transition-transform duration-500 ease-out hover:-translate-y-1.5 focus-visible:-translate-y-1.5"
-                >
-                  <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-parchment shadow-sm transition-shadow duration-500 group-hover:shadow-xl group-focus-visible:shadow-xl">
-                    <img
-                      src={IMG(poster.versions[0])}
-                      alt={poster.title}
-                      loading={i < 3 ? "eager" : "lazy"}
-                      className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105 group-focus-visible:scale-105"
-                    />
+                <div className="group relative">
+                  <button
+                    type="button"
+                    onClick={() => openPoster(poster)}
+                    className="block w-full text-left transition-transform duration-500 ease-out hover:-translate-y-1.5 focus-visible:-translate-y-1.5"
+                  >
+                    <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-parchment shadow-sm transition-shadow duration-500 group-hover:shadow-xl group-focus-visible:shadow-xl">
+                      <img
+                        src={IMG(poster.versions[0])}
+                        alt={poster.title}
+                        loading={i < 3 ? "eager" : "lazy"}
+                        className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105 group-focus-visible:scale-105"
+                      />
 
-                    {/* Price tag */}
-                    <span className="absolute left-3 top-3 rounded-full bg-background/90 px-3 py-1 font-sans text-[10px] uppercase tracking-[0.12em] text-foreground shadow-sm backdrop-blur-sm">
-                      {PRICE}
-                    </span>
-
-                    {/* Hint that slides up on hover */}
-                    <span className="pointer-events-none absolute inset-x-0 bottom-0 flex translate-y-3 items-center justify-between gap-3 bg-gradient-to-t from-black/60 to-transparent p-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
-                      <span className="font-sans text-[10px] uppercase tracking-[0.15em] text-ivory">
-                        Варианты
+                      <span className="absolute left-3 top-3 rounded-full bg-background/90 px-3 py-1 font-sans text-[10px] uppercase tracking-[0.12em] text-foreground shadow-sm backdrop-blur-sm">
+                        {PRICE}
                       </span>
-                      <ArrowRight className="size-3.5 text-ivory" strokeWidth={1.25} />
-                    </span>
-                  </div>
-                  <h2 className="mt-4 font-serif text-lg font-light leading-tight text-foreground md:text-xl">
-                    {poster.title}
-                  </h2>
-                </button>
+
+                      <span className="pointer-events-none absolute inset-x-0 bottom-0 flex translate-y-3 items-center justify-between gap-3 bg-gradient-to-t from-black/60 to-transparent p-4 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
+                        <span className="font-sans text-[10px] uppercase tracking-[0.15em] text-ivory">
+                          Варианты
+                        </span>
+                        <ArrowRight
+                          className="size-3.5 text-ivory"
+                          strokeWidth={1.25}
+                        />
+                      </span>
+                    </div>
+
+                    <h2 className="mt-4 font-serif text-lg font-light leading-tight text-foreground md:text-xl">
+                      {poster.title}
+                    </h2>
+                  </button>
+
+                  <Link
+                    to="/contact"
+                    className="absolute right-3 top-3 inline-flex items-center gap-2 rounded-full border border-foreground/15 bg-background/85 px-3 py-1.5 font-sans text-[10px] uppercase tracking-[0.12em] text-foreground/70 backdrop-blur-sm transition-all duration-300 hover:border-foreground hover:bg-background hover:text-foreground"
+                  >
+                    <span className="hidden sm:inline">Заказать такую же работу</span>
+                    <span className="sm:hidden">Заказать</span>
+                    <svg
+                      className="size-3"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" />
+                    </svg>
+                  </Link>
+                </div>
               </FadeIn>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ─── Poster overlay ─── */}
+      {/* Poster overlay */}
       {active && (
         <div
           role="dialog"
@@ -145,7 +183,6 @@ export default function Posters() {
           className="fixed inset-0 z-[100] overflow-y-auto bg-background/95 backdrop-blur-sm duration-300 animate-in fade-in"
         >
           <div className="flex min-h-full flex-col px-6 py-4">
-            {/* Close sits above the artwork in the flow, so it never covers it. */}
             <div className="flex shrink-0 justify-end">
               <button
                 onClick={() => setActive(null)}
@@ -237,9 +274,17 @@ export default function Posters() {
                   </div>
 
                   <p className="mt-8 border-t border-border/50 pt-6 font-sans text-sm leading-[1.9] text-muted-foreground">
-                    🌍 Доставка по Казахстану и по всему миру оплачивается по
+                    Доставка по Казахстану и по всему миру оплачивается по
                     тарифам почтовой службы
                   </p>
+
+                  <Link
+                    to="/contact"
+                    className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-foreground px-6 py-3 font-sans text-[11px] uppercase tracking-[0.15em] text-background transition-opacity duration-300 hover:opacity-85"
+                  >
+                    Заказать такую же работу
+                    <ArrowRight className="size-3.5" strokeWidth={2} />
+                  </Link>
                 </div>
               </div>
             </div>

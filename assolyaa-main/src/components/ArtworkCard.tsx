@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { motion } from "framer-motion";
 import { FileText } from "lucide-react";
 
@@ -56,8 +57,30 @@ export function ArtworkCard({ artwork, index = 0, onClick }: ArtworkCardProps) {
           {/* Subtle overlay on hover */}
           <div className="absolute inset-0 bg-foreground/0 transition-colors duration-500 group-hover:bg-foreground/5" />
         </button>
+
+        {/* Commission CTA — every work can be made anew, sold or not */}
+        <Link
+          to="/contact"
+          className="absolute right-3 top-3 inline-flex items-center gap-2 rounded-full border border-foreground/15 bg-background/85 px-2.5 py-1.5 font-sans text-[10px] uppercase tracking-[0.12em] text-foreground/70 backdrop-blur-sm transition-all duration-300 hover:border-foreground hover:bg-background hover:text-foreground"
+        >
+          <span className="hidden sm:inline">Заказать такую же работу</span>
+          <span className="sm:hidden">Заказать</span>
+          <svg
+            className="size-3 shrink-0"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M5 12h14" />
+            <path d="m12 5 7 7-7 7" />
+          </svg>
+        </Link>
+
         {/* Status badge — SOLD OUT reads as red text, the photo is never dimmed */}
-        <div className="pointer-events-none absolute left-4 top-4">
+        <div className="pointer-events-none absolute left-3 top-3">
           <span
             className={`inline-flex items-center px-3 py-1 font-sans text-[10px] font-medium uppercase tracking-[0.12em] backdrop-blur-sm ${
               sold

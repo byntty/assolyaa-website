@@ -1,40 +1,16 @@
 import { FadeIn } from "@/components/FadeIn";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
-import { Send } from "lucide-react";
-import { useState } from "react";
-import { toast } from "sonner";
-import { STUDIO_EMAIL, mailtoLink, socialLinks } from "@/lib/site";
+import {
+  STUDIO_EMAIL,
+  STUDIO_WHATSAPP,
+  socialLinks,
+  whatsappLink,
+} from "@/lib/site";
+
+const TELEGRAM_URL = "https://t.me/nurda_project";
 
 export default function Contact() {
-  const [sending, setSending] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (sending) return;
-    const data = new FormData(e.currentTarget);
-    const name = String(data.get("name") || "").trim();
-    const email = String(data.get("email") || "").trim();
-    // Use the option's visible text, not its value: the studio should receive
-    // «Заказ картины», not the internal slug "commission".
-    const topicSelect = e.currentTarget.elements.namedItem(
-      "topic",
-    ) as HTMLSelectElement | null;
-    const topic = data.get("topic")
-      ? topicSelect?.selectedOptions[0]?.text.trim() || ""
-      : "";
-    const message = String(data.get("message") || "").trim();
-    if (!name || !email || !message) return;
-    // No form backend yet: hand the message to the studio inbox.
-    setSending(true);
-    window.location.href = mailtoLink(
-      `[${topic || "Без темы"}] ${name}`,
-      `${message}\n\n— ${name} (${email})`,
-    );
-    toast.success("Откроется почтовый клиент для отправки сообщения.");
-    setTimeout(() => setSending(false), 1500);
-  };
-
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -74,86 +50,84 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Form + Info */}
-      <section className="px-6 py-20 lg:px-12">
+      {/* Info */}
+      <section className="px-6 pb-24 lg:px-12">
         <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-16 lg:grid-cols-12 lg:gap-20">
-          {/* Form */}
+          {/* Messengers */}
           <FadeIn className="lg:col-span-7">
-            <form onSubmit={handleSubmit} className="space-y-8">
-              <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
-                <div>
-                  <label className="mb-3 block font-sans text-[11px] uppercase tracking-[0.15em] text-muted-foreground">
-                    Имя
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    required
-                    placeholder="Ваше имя"
-                    className="w-full border-b border-border bg-transparent py-3 font-sans text-sm text-foreground placeholder:text-muted-foreground/50 transition-colors focus:border-foreground focus:outline-none"
-                  />
-                </div>
-                <div>
-                  <label className="mb-3 block font-sans text-[11px] uppercase tracking-[0.15em] text-muted-foreground">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    required
-                    placeholder="ваш@email.com"
-                    className="w-full border-b border-border bg-transparent py-3 font-sans text-sm text-foreground placeholder:text-muted-foreground/50 transition-colors focus:border-foreground focus:outline-none"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="mb-3 block font-sans text-[11px] uppercase tracking-[0.15em] text-muted-foreground">
-                  Тема
-                </label>
-                <select
-                  name="topic"
-                  defaultValue=""
-                  className="w-full cursor-pointer appearance-none border-b border-border bg-transparent py-3 font-sans text-sm text-foreground transition-colors focus:border-foreground focus:outline-none"
+            <div>
+              <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+                Мессенджеры
+              </p>
+              <div className="mt-6 space-y-2">
+                <a
+                  href={whatsappLink(
+                    "Здравствуйте! Хочу узнать о заказе картины.",
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-between gap-6 border-b border-border/40 py-5 transition-colors hover:border-foreground/20"
                 >
-                  <option value="">Выберите тему</option>
-                  <option value="commission">Заказ картины</option>
-                  <option value="exhibition">Выставка</option>
-                  <option value="press">Пресса и СМИ</option>
-                  <option value="purchase">Покупка готовой работы</option>
-                  <option value="collaboration">Сотрудничество</option>
-                  <option value="other">Другое</option>
-                </select>
-              </div>
+                  <span className="flex items-center gap-4">
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-green-500/10 font-sans text-[11px] uppercase tracking-[0.1em] text-green-600">
+                      WA
+                    </span>
+                    <span>
+                      <span className="block font-sans text-sm text-foreground transition-opacity group-hover:opacity-60">
+                        WhatsApp
+                      </span>
+                      <span className="block font-sans text-xs text-muted-foreground">
+                        +7 777 001 1686
+                      </span>
+                    </span>
+                  </span>
+                  <span className="font-sans text-[11px] uppercase tracking-[0.12em] text-muted-foreground transition-colors group-hover:text-foreground">
+                    Написать
+                  </span>
+                </a>
 
-              <div>
-                <label className="mb-3 block font-sans text-[11px] uppercase tracking-[0.15em] text-muted-foreground">
-                  Сообщение
-                </label>
-                <textarea
-                  name="message"
-                  rows={5}
-                  required
-                  placeholder="Расскажите о вашем проекте или вопросе..."
-                  className="w-full resize-none border-b border-border bg-transparent py-3 font-sans text-sm text-foreground placeholder:text-muted-foreground/50 transition-colors focus:border-foreground focus:outline-none"
-                />
-              </div>
+                <a
+                  href={TELEGRAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-between gap-6 border-b border-border/40 py-5 transition-colors hover:border-foreground/20"
+                >
+                  <span className="flex items-center gap-4">
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sky-500/10 font-sans text-[11px] uppercase tracking-[0.1em] text-sky-600">
+                      TG
+                    </span>
+                    <span>
+                      <span className="block font-sans text-sm text-foreground transition-opacity group-hover:opacity-60">
+                        Telegram
+                      </span>
+                      <span className="block font-sans text-xs text-muted-foreground">
+                        @nurda_project
+                      </span>
+                    </span>
+                  </span>
+                  <span className="font-sans text-[11px] uppercase tracking-[0.12em] text-muted-foreground transition-colors group-hover:text-foreground">
+                    Написать
+                  </span>
+                </a>
 
-              <button
-                type="submit"
-                disabled={sending}
-                className="group flex items-center gap-3 border-b border-foreground/30 pb-2 font-sans text-[11px] uppercase tracking-[0.15em] text-foreground transition-all duration-300 hover:border-foreground disabled:opacity-50"
-              >
-                Отправить
-                <Send className="size-3 transition-transform duration-300 group-hover:translate-x-1" />
-              </button>
-            </form>
+                <a
+                  href={`tel:+${STUDIO_WHATSAPP}`}
+                  className="group flex items-center justify-between gap-6 border-b border-border/40 py-5 transition-colors hover:border-foreground/20"
+                >
+                  <span className="font-sans text-sm text-foreground transition-opacity group-hover:opacity-60">
+                    Телефон
+                  </span>
+                  <span className="font-sans text-sm text-muted-foreground transition-colors group-hover:text-foreground">
+                    +7 777 001 1686
+                  </span>
+                </a>
+              </div>
+            </div>
           </FadeIn>
 
           {/* Info sidebar */}
           <FadeIn delay={0.15} className="lg:col-span-5">
             <div className="space-y-12">
-              {/* Social */}
               <div>
                 <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
                   Соцсети
@@ -178,37 +152,6 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Phone / WhatsApp */}
-              <div>
-                <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-                  Телефон / WhatsApp / Telegram
-                </p>
-                <div className="mt-6 space-y-2">
-                  <a
-                    href="tel:+77770011686"
-                    className="block font-serif text-lg font-light text-foreground transition-opacity hover:opacity-60"
-                  >
-                    +7 777 001 1686
-                  </a>
-                </div>
-              </div>
-
-              {/* Email */}
-              <div>
-                <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-                  Email
-                </p>
-                <div className="mt-6 space-y-2">
-                  <a
-                    href={`mailto:${STUDIO_EMAIL}`}
-                    className="block font-sans text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    {STUDIO_EMAIL}
-                  </a>
-                </div>
-              </div>
-
-              {/* Address */}
               <div>
                 <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
                   Адрес
@@ -226,7 +169,6 @@ export default function Contact() {
                 </div>
               </div>
 
-              {/* Hours */}
               <div>
                 <p className="font-sans text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
                   Время работы

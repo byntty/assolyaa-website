@@ -4,7 +4,7 @@ import { Footer } from "@/components/Footer";
 import { Navbar, navLinks } from "@/components/Navbar";
 import { ArrowRight } from "lucide-react";
 import { assetUrl } from "@/lib/assets";
-import { socialLinks } from "@/lib/site";
+import { socialLinks, whatsappLink } from "@/lib/site";
 
 /** One card per menu section — same list as the burger menu, nothing missing. */
 const cardImages: Record<string, string> = {
@@ -49,7 +49,7 @@ export default function Landing() {
             ))}
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 xl:gap-8 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-10 md:gap-x-6 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-16">
             {navLinks
               // Contacts sit in the menu, and «Главное» is this very page, so
               // neither gets its own card.
@@ -57,7 +57,7 @@ export default function Landing() {
               .map((card, i) => (
               <FadeIn key={card.path} delay={i * 0.06}>
                 <Link to={card.path} className="group block">
-                  <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-parchment">
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-parchment">
                     <img
                       src={cardImages[card.path]}
                       alt={card.label}
@@ -67,11 +67,11 @@ export default function Landing() {
                     {/* Shadow gradient at bottom */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent" />
                     {/* Label and arrow */}
-                    <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6">
-                      <h3 className="font-serif text-2xl font-light leading-tight text-ivory">
+                    <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4 md:gap-4 md:p-6">
+                      <h3 className="font-serif text-lg font-light leading-tight text-ivory md:text-2xl">
                         {card.label}
                       </h3>
-                      <span className="mb-1 flex size-9 shrink-0 items-center justify-center rounded-full border border-ivory/50 text-ivory transition-colors duration-300 group-hover:border-ivory group-hover:bg-ivory group-hover:text-foreground">
+                      <span className="mb-1 hidden size-9 shrink-0 items-center justify-center rounded-full border border-ivory/50 text-ivory transition-colors duration-300 group-hover:border-ivory group-hover:bg-ivory group-hover:text-foreground sm:flex">
                         <ArrowRight className="size-3.5" strokeWidth={1.25} />
                       </span>
                     </div>
@@ -100,9 +100,24 @@ export default function Landing() {
               >
                 +7 777 001 1686
               </a>
-              <p className="font-sans text-sm leading-relaxed text-muted-foreground">
-                WhatsApp / Telegram
-              </p>
+              <div className="flex items-center justify-center gap-6">
+                <a
+                  href={whatsappLink("Здравствуйте! Хочу узнать о заказе картины.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-sans text-sm text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
+                >
+                  WhatsApp
+                </a>
+                <a
+                  href="https://t.me/nurda_project"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-sans text-sm text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
+                >
+                  Telegram
+                </a>
+              </div>
               <a
                 href="mailto:nurdaulet.bekzhan@gmail.com"
                 className="block font-sans text-sm text-muted-foreground transition-colors hover:text-foreground"
@@ -117,13 +132,6 @@ export default function Landing() {
                 Ежедневно, 10:00–20:00
               </p>
             </div>
-            <Link
-              to="/contact"
-              className="mt-10 inline-flex items-center gap-3 border-b border-foreground/30 pb-2 font-sans text-[11px] uppercase tracking-[0.15em] text-foreground transition-all duration-300 hover:border-foreground"
-            >
-              Форма обратной связи
-              <ArrowRight className="size-3" />
-            </Link>
           </div>
         </FadeIn>
       </section>

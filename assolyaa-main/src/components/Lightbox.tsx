@@ -1,7 +1,7 @@
 import { useEffect, useCallback } from "react";
-import { Link } from "react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+import { Link } from "react-router";
 import type { Artwork } from "./ArtworkCard";
 
 interface LightboxProps {
@@ -145,14 +145,12 @@ export function Lightbox({ artwork, onClose }: LightboxProps) {
                     </div>
                   )}
 
-                  {artwork.status === "available" && (
-                    <Link
-                      to="/contact"
-                      className="mt-8 inline-flex items-center gap-2 border-b border-foreground/30 pb-1 font-sans text-[11px] uppercase tracking-[0.15em] text-foreground transition-all duration-300 hover:border-foreground hover:opacity-70"
-                    >
-                      Заказать такую же работу
-                    </Link>
-                  )}
+                  <Link
+                    to="/contact"
+                    className="mt-8 inline-flex items-center gap-2 border-b border-foreground/30 pb-1 font-sans text-[11px] uppercase tracking-[0.15em] text-foreground transition-all duration-300 hover:border-foreground hover:opacity-70"
+                  >
+                    Заказать такую же работу
+                  </Link>
                 </div>
               </motion.div>
             </div>
