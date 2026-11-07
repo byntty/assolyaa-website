@@ -19,7 +19,7 @@ export const navLinks = [
   { label: "Контакты", path: "/contact" },
 ];
 
-export function Navbar() {
+export function Navbar({ dark = false }: { dark?: boolean }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
@@ -46,8 +46,12 @@ export function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
+          dark ? "text-ivory" : "text-foreground"
+        } ${
           scrolled || !isHome
-            ? "bg-background/90 backdrop-blur-md border-b border-border/50"
+            ? dark
+              ? "bg-[#141110]/92 backdrop-blur-md border-b border-white/10"
+              : "bg-background/90 backdrop-blur-md border-b border-border/50"
             : "bg-transparent"
         }`}
       >
@@ -83,9 +87,11 @@ export function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-background"
+            className={`fixed inset-0 z-40 flex flex-col overflow-y-auto px-6 pb-12 pt-24 ${
+              dark ? "bg-[#141110] text-ivory" : "bg-background text-foreground"
+            }`}
           >
-            <nav className="flex max-h-[85vh] flex-col items-center gap-6 overflow-y-auto py-10 lg:gap-7">
+            <nav className="my-auto flex flex-col items-center gap-6 lg:gap-7">
               {navLinks.map((link, i) => (
                 <motion.div
                   key={link.path}

@@ -138,7 +138,7 @@ export default function Exhibitions() {
 
   return (
     <div className="min-h-screen bg-[#141110] text-ivory">
-      <Navbar />
+      <Navbar dark />
 
       {/* ─── Hero ─── */}
       <section className="relative min-h-[64vh] overflow-hidden">
