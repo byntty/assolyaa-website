@@ -29,6 +29,9 @@ The convex server has a separate set of environment variables that are accessibl
 
 ### GitHub Pages
 
+Домен, DNS-записи, настройки Pages и проверка после деплоя описаны в
+[`DEPLOY.md`](../DEPLOY.md) в корне репозитория.
+
 The Pages workflow requires a repository Actions secret named `VITE_CONVEX_URL`
 containing the production Convex URL. If no Convex project is configured yet,
 the site can still be built and published; authentication features will need a
